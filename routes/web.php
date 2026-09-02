@@ -99,6 +99,13 @@ Route::prefix('cp-dpa')->name('cp.')->group(function () {
 // ═══════════════════════════════════════════════════════════════════════════════
 // ADMIN PANEL — Semua dilindungi middleware AdminAuth
 // ═══════════════════════════════════════════════════════════════════════════════
+//
+// PENTING: grup ini sudah diberi ->name('admin.'), jadi SETIAP nama route di
+// dalamnya otomatis diawali "admin.". Jangan tambahkan prefix "admin." lagi
+// secara manual di ->name()/->names() di dalam grup ini — itu penyebab bug
+// "Route [admin.subsidiaries.create] not defined" (nama asli jadi
+// admin.admin.subsidiaries.create).
+// ═══════════════════════════════════════════════════════════════════════════════
 
 Route::prefix('panel')->name('admin.')->middleware(['web', 'admin.auth'])->group(function () {
 
@@ -118,23 +125,23 @@ Route::prefix('panel')->name('admin.')->middleware(['web', 'admin.auth'])->group
     // ── Anak Perusahaan ───────────────────────────────────────────────────────
     Route::resource('/anak-perusahaan', SubsidiaryController::class)
         ->except(['show'])
-        ->names('admin.subsidiaries')
+        ->names('subsidiaries')
         ->parameters(['anak-perusahaan' => 'subsidiary']);
     Route::post('/anak-perusahaan/order', [SubsidiaryController::class, 'updateOrder'])->name('subsidiaries.order');
 
     // ── Produk & Layanan ──────────────────────────────────────────────────────
     Route::resource('/produk-layanan', ProductServiceController::class)
         ->except(['show'])
-        ->names('admin.products')
+        ->names('products')
         ->parameters(['produk-layanan' => 'product']);
-    Route::delete('/produk-layanan/image/{image}', [ProductServiceController::class, 'destroyImage'])->name('admin.products.image.destroy');
+    Route::delete('/produk-layanan/image/{image}', [ProductServiceController::class, 'destroyImage'])->name('products.image.destroy');
 
     // ── Struktur Manajemen ────────────────────────────────────────────────────
     Route::resource('/manajemen', ManagementController::class)
         ->except(['show'])
-        ->names('admin.management')
+        ->names('management')
         ->parameters(['manajemen' => 'management']);
-    Route::post('/manajemen/order', [ManagementController::class, 'updateOrder'])->name('admin.management.order');
+    Route::post('/manajemen/order', [ManagementController::class, 'updateOrder'])->name('management.order');
 
     // ── Konten Tentang Kami ───────────────────────────────────────────────────
     Route::get('/tentang/sejarah', [AboutContentController::class, 'historyIndex'])->name('about.history');

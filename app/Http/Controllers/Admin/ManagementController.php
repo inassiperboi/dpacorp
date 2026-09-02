@@ -41,7 +41,8 @@ class ManagementController extends Controller
 
     public function edit(ManagementMember $management)
     {
-        return view('admin.management.edit', compact('management'));
+        $member = $management;
+        return view('admin.management.edit', compact('member'));
     }
 
     public function update(Request $request, ManagementMember $management)

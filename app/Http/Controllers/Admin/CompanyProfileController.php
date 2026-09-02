@@ -12,9 +12,9 @@ class CompanyProfileController extends Controller
 {
     public function edit()
     {
-        $profile = CompanyProfile::getInstance();
+        $company = CompanyProfile::getInstance();
         $seo     = SeoSetting::getInstance();
-        return view('admin.company-profile.edit', compact('profile', 'seo'));
+        return view('admin.company-profile.edit', compact('company', 'seo'));
     }
 
     public function update(Request $request)
@@ -27,20 +27,23 @@ class CompanyProfileController extends Controller
             'favicon'    => 'nullable|image|max:512',
         ]);
 
-        $profile = CompanyProfile::getInstance();
-        $data    = $request->except(['_token', '_method', 'logo', 'favicon']);
+        $company = CompanyProfile::getInstance();
+        $data    = $request->except(['_token', '_method', 'logo', 'favicon', 'cover']);
 
         if ($request->hasFile('logo')) {
-            if ($profile->logo) Storage::disk('public')->delete($profile->logo);
+            if ($company->logo) Storage::disk('public')->delete($company->logo);
             $data['logo'] = $request->file('logo')->store('company', 'public');
         }
-
+        if ($request->hasFile('cover')) {
+            if ($company->cover) Storage::disk('public')->delete($company->cover);
+            $data['cover'] = $request->file('cover')->store('company', 'public');
+        }
         if ($request->hasFile('favicon')) {
-            if ($profile->favicon) Storage::disk('public')->delete($profile->favicon);
+            if ($company->favicon) Storage::disk('public')->delete($company->favicon);
             $data['favicon'] = $request->file('favicon')->store('company', 'public');
         }
 
-        $profile->update($data);
+        $company->update($data);
 
         return redirect()->route('admin.company-profile.edit')
             ->with('success', 'Profil perusahaan berhasil diperbarui.');

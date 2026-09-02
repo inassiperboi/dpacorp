@@ -44,9 +44,9 @@ class AboutContentController extends Controller
 
     public function legalIndex()
     {
-        $documents = LegalDocument::orderBy('order')->get();
+        $legals    = LegalDocument::orderBy('order')->get();
         $kbliItems = KbliItem::orderBy('order')->get();
-        return view('admin.about.legal', compact('documents', 'kbliItems'));
+        return view('admin.about.legal', compact('legals', 'kbliItems'));
     }
 
     public function legalStore(Request $request)
@@ -108,8 +108,8 @@ class AboutContentController extends Controller
     public function missionStore(Request $request)
     {
         $request->validate(['isi_misi' => 'required']);
-        $max = MissionPoint::max('order') ?? 0;
-        MissionPoint::create(['isi_misi' => $request->isi_misi, 'order' => $max + 1]);
+        $order = $request->order ?? (MissionPoint::max('order') + 1);
+        MissionPoint::create(['isi_misi' => $request->isi_misi, 'order' => $order, 'is_active' => true]);
         return redirect()->route('admin.about.vision-mission')->with('success', 'Misi berhasil ditambahkan.');
     }
 
