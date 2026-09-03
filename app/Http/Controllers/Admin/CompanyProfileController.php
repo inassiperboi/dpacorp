@@ -28,15 +28,11 @@ class CompanyProfileController extends Controller
         ]);
 
         $company = CompanyProfile::getInstance();
-        $data    = $request->except(['_token', '_method', 'logo', 'favicon', 'cover']);
+        $data    = $request->except(['_token', '_method', 'logo', 'favicon']);
 
         if ($request->hasFile('logo')) {
             if ($company->logo) Storage::disk('public')->delete($company->logo);
             $data['logo'] = $request->file('logo')->store('company', 'public');
-        }
-        if ($request->hasFile('cover')) {
-            if ($company->cover) Storage::disk('public')->delete($company->cover);
-            $data['cover'] = $request->file('cover')->store('company', 'public');
         }
         if ($request->hasFile('favicon')) {
             if ($company->favicon) Storage::disk('public')->delete($company->favicon);

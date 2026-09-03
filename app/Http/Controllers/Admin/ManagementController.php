@@ -29,6 +29,7 @@ class ManagementController extends Controller
         ]);
 
         $data = $request->except(['_token', 'foto']);
+        $data['is_active'] = $request->boolean('is_active');
         if ($request->hasFile('foto')) {
             $data['foto'] = $request->file('foto')->store('management', 'public');
         }
@@ -54,6 +55,7 @@ class ManagementController extends Controller
         ]);
 
         $data = $request->except(['_token', '_method', 'foto']);
+        $data['is_active'] = $request->boolean('is_active');
         if ($request->hasFile('foto')) {
             if ($management->foto) Storage::disk('public')->delete($management->foto);
             $data['foto'] = $request->file('foto')->store('management', 'public');

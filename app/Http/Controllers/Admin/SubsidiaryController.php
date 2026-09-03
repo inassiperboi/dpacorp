@@ -34,6 +34,7 @@ class SubsidiaryController extends Controller
 
         $data = $request->except(['_token', 'logo', 'cover_image', 'services']);
         $data['slug'] = Str::slug($request->nama);
+        $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('subsidiaries', 'public');
@@ -79,6 +80,7 @@ class SubsidiaryController extends Controller
         ]);
 
         $data = $request->except(['_token', '_method', 'logo', 'cover_image', 'services']);
+        $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('logo')) {
             if ($subsidiary->logo) Storage::disk('public')->delete($subsidiary->logo);

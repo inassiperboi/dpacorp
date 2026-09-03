@@ -23,6 +23,7 @@ class ClientController extends Controller
         ]);
 
         $data = $request->except(['_token', 'logo']);
+        $data['is_active'] = $request->boolean('is_active');
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('clients', 'public');
         }
@@ -34,6 +35,7 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
         $data = $request->except(['_token', '_method', 'logo']);
+        $data['is_active'] = $request->boolean('is_active');
         if ($request->hasFile('logo')) {
             if ($client->logo) Storage::disk('public')->delete($client->logo);
             $data['logo'] = $request->file('logo')->store('clients', 'public');

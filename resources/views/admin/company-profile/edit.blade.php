@@ -132,8 +132,12 @@
                     <label class="form-label">Alt Text Logo</label>
                     <input type="text" name="logo_alt" class="form-control"
                            value="{{ old('logo_alt', $company->logo_alt ?? '') }}" placeholder="Logo DPA Corp">
-                    <label class="form-label" style="margin-top:12px;">Cover / Banner Header</label>
-                    <input type="file" name="cover" class="form-control" accept="image/*">
+                    <label class="form-label" style="margin-top:12px;">Favicon</label>
+                    @if($company && $company->favicon)
+                        <img src="{{ asset('storage/'.$company->favicon) }}" alt="Favicon" style="height:28px;display:block;margin-bottom:8px;border-radius:4px;">
+                    @endif
+                    <input type="file" name="favicon" class="form-control" accept="image/*">
+                    <div class="form-hint">Format PNG/ICO persegi. Maks 512KB.</div>
                 </div>
             </div>
 

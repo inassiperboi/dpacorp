@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Website (opsional)</label>
-                    <input type="url" name="website" class="form-control" value="{{ old('website') }}"
+                    <input type="url" name="website_url" class="form-control" value="{{ old('website_url') }}"
                            placeholder="https://www.contoh.com">
                 </div>
                 <div class="form-group">
@@ -77,8 +77,8 @@
                         </td>
                         <td style="font-weight:600;">{{ $c->nama }}</td>
                         <td>
-                            @if($c->website)
-                                <a href="{{ $c->website }}" target="_blank" style="font-size:12px;color:var(--primary-light);">↗ Link</a>
+                            @if($c->website_url)
+                                <a href="{{ $c->website_url }}" target="_blank" style="font-size:12px;color:var(--primary-light);">↗ Link</a>
                             @else
                                 <span style="color:var(--text-muted);font-size:12px;">—</span>
                             @endif

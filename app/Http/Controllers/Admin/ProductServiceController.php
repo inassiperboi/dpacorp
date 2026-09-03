@@ -32,6 +32,7 @@ class ProductServiceController extends Controller
 
         $data         = $request->except(['_token', 'thumbnail', 'galeri']);
         $data['slug'] = Str::slug($request->nama);
+        $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('thumbnail')) {
             $data['thumbnail'] = $request->file('thumbnail')->store('products', 'public');
@@ -69,6 +70,7 @@ class ProductServiceController extends Controller
         ]);
 
         $data = $request->except(['_token', '_method', 'thumbnail', 'galeri']);
+        $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('thumbnail')) {
             if ($product->thumbnail) Storage::disk('public')->delete($product->thumbnail);
