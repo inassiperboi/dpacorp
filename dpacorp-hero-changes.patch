@@ -1,0 +1,241 @@
+diff --git a/resources/css/app.css b/resources/css/app.css
+index 4ffab76..b9d86c1 100644
+--- a/resources/css/app.css
++++ b/resources/css/app.css
+@@ -40,8 +40,23 @@ .navbar {
+     height: 68px;
+ }
+ .navbar-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+-.navbar-brand img { height: 42px; }
+-.navbar-brand .brand-text { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary); }
++.navbar-brand img,
++.navbar-brand .brand-logo-fallback {
++    height: 44px; width: 44px;
++    flex: 0 0 44px;
++    object-fit: contain;
++    border-radius: 8px;
++}
++.navbar-brand .brand-logo-fallback {
++    display: flex; align-items: center; justify-content: center;
++    background: var(--primary); color: #fff; font-size: 20px;
++}
++.navbar-brand .brand-text {
++    font-family: 'Poppins', sans-serif;
++    font-size: 15px; line-height: 1.25; font-weight: 700;
++    color: var(--primary);
++    max-width: 200px;
++}
+ .navbar-brand .brand-text span { color: var(--accent); }
+ .navbar-nav { display: flex; align-items: center; gap: 4px; }
+ .nav-link { padding: 8px 14px; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: all .2s; }
+diff --git a/resources/views/public/home.blade.php b/resources/views/public/home.blade.php
+index 7fe8157..f5086d4 100644
+--- a/resources/views/public/home.blade.php
++++ b/resources/views/public/home.blade.php
+@@ -6,12 +6,79 @@
+ @section('content')
+
+ {{-- ─── Hero Section ───────────────────────────────── --}}
+-<section style="min-height:92vh;display:flex;align-items:center;background:linear-gradient(135deg,#0d1f45 0%,#1a3a6e 50%,#0f2a5c 100%);position:relative;overflow:hidden;padding:0 5%;">
+-    {{-- Background decorative elements --}}
+-    <div style="position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(232,160,32,.15) 0%,transparent 70%);pointer-events:none;"></div>
+-    <div style="position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(41,82,163,.3) 0%,transparent 70%);pointer-events:none;"></div>
++<section class="hero-section" style="min-height:92vh;display:flex;align-items:center;background:linear-gradient(180deg,#0a1e4a 0%,#15316b 45%,#2456a0 100%);position:relative;overflow:hidden;padding:0 5%;">
+
+-    <div style="position:relative;z-index:1;max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:100px 0;">
++    {{-- Fully animated illustrated scene — pure CSS/SVG, no video file needed.
++         Drifting clouds, planes with dashed flight trails, a twinkling city skyline,
++         and a truck driving along the road. --}}
++    <div class="hero-scene" aria-hidden="true">
++
++        <div class="hero-cloud hero-cloud-1"></div>
++        <div class="hero-cloud hero-cloud-2"></div>
++        <div class="hero-cloud hero-cloud-3"></div>
++        <div class="hero-cloud hero-cloud-4"></div>
++
++        <svg class="hero-trail" viewBox="0 0 1600 500" preserveAspectRatio="none">
++            <path d="M -50 260 C 250 140, 700 90, 1650 -180" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
++            <path d="M -50 380 C 300 340, 650 420, 1650 260" fill="none" stroke="rgba(240,184,74,.3)" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
++        </svg>
++        <div class="hero-plane hero-plane-1">
++            <svg viewBox="0 0 24 24" width="38" height="38" fill="#fff"><path d="M22 16.5v-2l-8.5-5V4a1.5 1.5 0 0 0-3 0v5.5L2 14.5v2l8.5-2.5V19l-2.5 1.8V22l3.5-1 3.5 1v-1.2L12.5 19v-5.5L22 16.5z"/></svg>
++        </div>
++        <div class="hero-plane hero-plane-2">
++            <svg viewBox="0 0 24 24" width="22" height="22" fill="rgba(240,184,74,.85)"><path d="M22 16.5v-2l-8.5-5V4a1.5 1.5 0 0 0-3 0v5.5L2 14.5v2l8.5-2.5V19l-2.5 1.8V22l3.5-1 3.5 1v-1.2L12.5 19v-5.5L22 16.5z"/></svg>
++        </div>
++
++        <svg class="hero-skyline" viewBox="0 0 1600 220" preserveAspectRatio="none">
++            <g fill="rgba(9,20,50,.55)">
++                <rect x="0" y="140" width="60" height="80"/><rect x="70" y="100" width="50" height="120"/>
++                <rect x="130" y="130" width="40" height="90"/><rect x="180" y="70" width="55" height="150"/>
++                <rect x="245" y="120" width="45" height="100"/><rect x="300" y="150" width="60" height="70"/>
++                <rect x="370" y="90" width="50" height="130"/><rect x="430" y="130" width="40" height="90"/>
++                <rect x="480" y="60" width="55" height="160"/><rect x="545" y="110" width="45" height="110"/>
++                <rect x="600" y="150" width="60" height="70"/><rect x="670" y="95" width="50" height="125"/>
++                <rect x="730" y="135" width="40" height="85"/><rect x="780" y="65" width="55" height="155"/>
++                <rect x="845" y="115" width="45" height="105"/><rect x="900" y="150" width="60" height="70"/>
++                <rect x="970" y="90" width="50" height="130"/><rect x="1030" y="130" width="40" height="90"/>
++                <rect x="1080" y="55" width="55" height="165"/><rect x="1145" y="110" width="45" height="110"/>
++                <rect x="1200" y="150" width="60" height="70"/><rect x="1270" y="95" width="50" height="125"/>
++                <rect x="1330" y="135" width="40" height="85"/><rect x="1380" y="70" width="55" height="150"/>
++                <rect x="1445" y="115" width="45" height="105"/><rect x="1500" y="150" width="60" height="70"/>
++                <rect x="1560" y="100" width="40" height="120"/>
++            </g>
++            <g class="hero-window" fill="#f0b84a">
++                <circle cx="90" cy="140" r="2.4"/><circle cx="200" cy="110" r="2.4"/>
++                <circle cx="360" cy="170" r="2.4"/><circle cx="500" cy="95" r="2.4"/>
++                <circle cx="700" cy="130" r="2.4"/><circle cx="850" cy="150" r="2.4"/>
++                <circle cx="1000" cy="115" r="2.4"/><circle cx="1160" cy="140" r="2.4"/>
++                <circle cx="1300" cy="120" r="2.4"/><circle cx="1450" cy="150" r="2.4"/>
++            </g>
++        </svg>
++
++        <div class="hero-road"></div>
++
++        <div class="hero-truck">
++            <svg viewBox="0 0 48 28" width="60" height="35">
++                <rect x="1" y="8" width="26" height="14" rx="1.5" fill="#e9eef7"/>
++                <rect x="27" y="4" width="16" height="18" rx="1.5" fill="#c7d2e6"/>
++                <rect x="30" y="7" width="9" height="7" rx="1" fill="#5b7bb8"/>
++                <circle cx="10" cy="24" r="3.4" fill="#0f172a"/><circle cx="10" cy="24" r="1.4" fill="#94a3b8"/>
++                <circle cx="35" cy="24" r="3.4" fill="#0f172a"/><circle cx="35" cy="24" r="1.4" fill="#94a3b8"/>
++            </svg>
++        </div>
++    </div>
++
++    {{-- Tint over the scene so text stays readable --}}
++    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,31,69,.55) 0%,rgba(26,58,110,.4) 50%,rgba(15,42,92,.55) 100%);z-index:1;pointer-events:none;"></div>
++
++    {{-- Background decorative glows --}}
++    <div style="position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(232,160,32,.15) 0%,transparent 70%);pointer-events:none;z-index:1;"></div>
++    <div style="position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(41,82,163,.3) 0%,transparent 70%);pointer-events:none;z-index:1;"></div>
++
++    {{-- Soft fade at the base so the section blends into the next one instead of cutting off --}}
++    <div style="position:absolute;left:0;right:0;bottom:0;height:200px;background:linear-gradient(to bottom, rgba(15,42,92,0) 0%, rgba(15,42,92,.55) 55%, #ffffff 100%);z-index:2;pointer-events:none;"></div>
++
++    <div style="position:relative;z-index:3;max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:100px 0;">
+         <div>
+             <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(232,160,32,.15);border:1px solid rgba(232,160,32,.3);color:#f0b84a;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px;">
+                 🏛️ Holding Company Universitas Airlangga
+@@ -48,17 +115,81 @@
+             </div>
+         </div>
+         <div style="display:flex;justify-content:center;align-items:center;">
+-            <div style="width:360px;height:360px;background:rgba(255,255,255,.06);border-radius:32px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);">
+-                @if($company->logo)
+-                    <img src="{{ asset('storage/'.$company->logo) }}" alt="{{ $company->logo_alt ?? 'Logo DPA Corp' }}" style="max-width:260px;max-height:260px;object-fit:contain;">
+-                @else
+-                    <div style="font-size:80px;opacity:.4;">🏛️</div>
+-                @endif
+-            </div>
++            @if($company->logo)
++                {{-- Transparent PNG expected: no wrapper box, it just sits on the hero background --}}
++                <img src="{{ asset('storage/'.$company->logo) }}" alt="{{ $company->logo_alt ?? 'Logo PT Dharma Putra Airlangga' }}" style="width:100%;max-width:440px;height:auto;object-fit:contain;filter:drop-shadow(0 20px 40px rgba(0,0,0,.25));">
++            @else
++                <div style="font-size:130px;opacity:.35;">🏛️</div>
++            @endif
+         </div>
+     </div>
+ </section>
+
++@push('head')
++<style>
++    .hero-scene { position:absolute; inset:0; z-index:0; overflow:hidden; }
++
++    /* Drifting clouds */
++    .hero-cloud { position:absolute; border-radius:999px; background:rgba(255,255,255,.18); filter:blur(2px); }
++    .hero-cloud-1 { width:220px; height:60px; top:8%;  left:-260px; animation:cloudDrift 40s linear infinite; }
++    .hero-cloud-2 { width:160px; height:44px; top:20%; left:-200px; animation:cloudDrift 55s linear infinite 8s; opacity:.7; }
++    .hero-cloud-3 { width:280px; height:70px; top:38%; left:-320px; animation:cloudDrift 65s linear infinite 20s; opacity:.5; }
++    .hero-cloud-4 { width:190px; height:50px; top:55%; left:-220px; animation:cloudDrift 48s linear infinite 30s; opacity:.6; }
++    @keyframes cloudDrift {
++        0%   { transform:translateX(0); }
++        100% { transform:translateX(calc(100vw + 320px)); }
++    }
++
++    /* Dashed flight trails behind the planes */
++    .hero-trail { position:absolute; inset:0; width:100%; height:100%; z-index:0; }
++
++    /* Flying planes */
++    .hero-plane { position:absolute; will-change:transform; }
++    .hero-plane-1 { top:32%; left:-40px; animation:plane1Move 26s linear infinite; }
++    .hero-plane-2 { top:70%; left:-30px; animation:plane2Move 34s linear infinite 10s; }
++    @keyframes plane1Move {
++        0%   { transform:translate(0,0) rotate(-18deg); opacity:0; }
++        6%   { opacity:1; }
++        94%  { opacity:1; }
++        100% { transform:translate(calc(100vw + 80px), -260px) rotate(-18deg); opacity:0; }
++    }
++    @keyframes plane2Move {
++        0%   { transform:translate(0,0) rotate(-10deg); opacity:0; }
++        6%   { opacity:1; }
++        94%  { opacity:1; }
++        100% { transform:translate(calc(100vw + 60px), -120px) rotate(-10deg); opacity:0; }
++    }
++
++    /* City skyline + twinkling windows */
++    .hero-skyline { position:absolute; left:0; right:0; bottom:60px; width:100%; height:22%; min-height:140px; }
++    .hero-window circle { animation:twinkle 3.4s ease-in-out infinite; }
++    .hero-window circle:nth-child(odd) { animation-delay:1.1s; }
++    .hero-window circle:nth-child(3n) { animation-delay:2s; }
++    @keyframes twinkle { 0%, 100% { opacity:.25; } 50% { opacity:1; } }
++
++    /* Road with moving lane markings + driving truck */
++    .hero-road { position:absolute; left:0; right:0; bottom:0; height:60px; background:linear-gradient(to bottom, rgba(9,20,50,.6), rgba(9,20,50,.85)); }
++    .hero-road::after {
++        content:''; position:absolute; top:50%; left:0; right:0; height:2px;
++        background:repeating-linear-gradient(90deg, rgba(255,255,255,.5) 0 24px, transparent 24px 48px);
++        animation:roadLines 1.4s linear infinite;
++    }
++    @keyframes roadLines { 0% { background-position:0 0; } 100% { background-position:-48px 0; } }
++    .hero-truck { position:absolute; bottom:14px; left:-80px; animation:truckDrive 18s linear infinite 3s; }
++    @keyframes truckDrive {
++        0%   { transform:translateX(0); opacity:0; }
++        6%   { opacity:1; }
++        94%  { opacity:1; }
++        100% { transform:translateX(calc(100vw + 100px)); opacity:0; }
++    }
++
++    @media (prefers-reduced-motion: reduce) {
++        .hero-cloud, .hero-plane, .hero-truck, .hero-window circle { animation:none !important; }
++        .hero-road::after { animation:none !important; }
++    }
++</style>
++@endpush
++
+ {{-- ─── Anak Perusahaan Highlight ─────────────────────── --}}
+ @if($subsidiaries->count())
+ <section style="padding:80px 5%;background:var(--bg);">
+diff --git a/resources/views/public/layouts/app.blade.php b/resources/views/public/layouts/app.blade.php
+index 239d691..153bf26 100644
+--- a/resources/views/public/layouts/app.blade.php
++++ b/resources/views/public/layouts/app.blade.php
+@@ -1,4 +1,3 @@
+ <!DOCTYPE html>
+ <html lang="id">
+ <head>
+@@ -112,13 +111,17 @@ function gtag() {
+
+             <img
+                 src="{{ asset('storage/'.$company->logo) }}"
+-                alt="{{ $company->logo_alt ?? 'Logo DPA Corp' }}"
++                alt="{{ $company->logo_alt ?? 'Logo PT Dharma Putra Airlangga' }}"
+             >
+
++        @else
++
++            <div class="brand-logo-fallback" aria-hidden="true">🏛️</div>
++
+         @endif
+
+         <span class="brand-text">
+-            DPA <span>Corp</span>
++            {{ $company->nama_resmi ?? 'PT Dharma Putra Airlangga' }}
+         </span>
+
+     </a>
+@@ -496,4 +499,3 @@ function toggleNav() {
+
+ </body>
+ </html>
+

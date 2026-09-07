@@ -4,15 +4,44 @@
 <?php $__env->startSection('content'); ?>
 
 
-<section style="min-height:92vh;display:flex;align-items:center;background:linear-gradient(135deg,#0d1f45 0%,#1a3a6e 50%,#0f2a5c 100%);position:relative;overflow:hidden;padding:0 5%;">
-    
-    <div style="position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(232,160,32,.15) 0%,transparent 70%);pointer-events:none;"></div>
-    <div style="position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(41,82,163,.3) 0%,transparent 70%);pointer-events:none;"></div>
+<section class="hero-section" style="min-height:92vh;display:flex;align-items:center;background:linear-gradient(180deg,#0a1e4a 0%,#15316b 45%,#2456a0 100%);position:relative;overflow:hidden;padding:0 5%;">
 
-    <div style="position:relative;z-index:1;max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:100px 0;">
+    
+    <div class="hero-scene" aria-hidden="true">
+
+        <img class="hero-cloud hero-cloud-1" src="<?php echo e(asset('images/hero/cloud.png')); ?>" alt="" onerror="this.style.display='none'">
+        <img class="hero-cloud hero-cloud-2" src="<?php echo e(asset('images/hero/cloud.png')); ?>" alt="" onerror="this.style.display='none'">
+        <img class="hero-cloud hero-cloud-3" src="<?php echo e(asset('images/hero/cloud.png')); ?>" alt="" onerror="this.style.display='none'">
+        <img class="hero-cloud hero-cloud-4" src="<?php echo e(asset('images/hero/cloud.png')); ?>" alt="" onerror="this.style.display='none'">
+
+        <svg class="hero-trail" viewBox="0 0 1600 500" preserveAspectRatio="none">
+            <path d="M -50 260 C 250 140, 700 90, 1650 -180" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
+            <path d="M -50 380 C 300 340, 650 420, 1650 260" fill="none" stroke="rgba(240,184,74,.3)" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
+        </svg>
+        
+        
+
+        <img class="hero-skyline" src="<?php echo e(asset('images/hero/skyline.png')); ?>" alt="" onerror="this.style.display='none'">
+
+        <div class="hero-road"></div>
+
+        <img class="hero-truck" src="<?php echo e(asset('images/hero/truck.png')); ?>" alt="" onerror="this.style.display='none'">
+    </div>
+
+    
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,31,69,.55) 0%,rgba(26,58,110,.4) 50%,rgba(15,42,92,.55) 100%);z-index:1;pointer-events:none;"></div>
+
+    
+    <div style="position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(232,160,32,.15) 0%,transparent 70%);pointer-events:none;z-index:1;"></div>
+    <div style="position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(41,82,163,.3) 0%,transparent 70%);pointer-events:none;z-index:1;"></div>
+
+    
+    <div style="position:absolute;left:0;right:0;bottom:0;height:200px;background:linear-gradient(to bottom, rgba(15,42,92,0) 0%, rgba(15,42,92,.55) 55%, #ffffff 100%);z-index:2;pointer-events:none;"></div>
+
+    <div style="position:relative;z-index:3;max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:100px 0;">
         <div>
             <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(232,160,32,.15);border:1px solid rgba(232,160,32,.3);color:#f0b84a;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px;">
-                🏛️ Holding Company Universitas Airlangga
+                Holding Company Universitas Airlangga
             </div>
             <h1 style="font-family:'Poppins',sans-serif;font-size:clamp(32px,5vw,54px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:20px;">
                 <?php echo e($company->nama_resmi ?? 'PT Dharma Putra Airlangga'); ?>
@@ -47,17 +76,75 @@
                 </div>
             </div>
         </div>
-        <div style="display:flex;justify-content:center;align-items:center;">
-            <div style="width:360px;height:360px;background:rgba(255,255,255,.06);border-radius:32px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);">
-                <?php if($company->logo): ?>
-                    <img src="<?php echo e(asset('storage/'.$company->logo)); ?>" alt="<?php echo e($company->logo_alt ?? 'Logo DPA Corp'); ?>" style="max-width:260px;max-height:260px;object-fit:contain;">
-                <?php else: ?>
-                    <div style="font-size:80px;opacity:.4;">🏛️</div>
-                <?php endif; ?>
-            </div>
+            <div style="display:flex;justify-content:center;align-items:center;transform:translateX(50px);">            <img
+                src="<?php echo e(asset('images/hero/logos.png')); ?>"
+                alt="Logo PT Dharma Putra Airlangga"
+                style="width:100%;max-width:440px;height:auto;object-fit:contain;filter:drop-shadow(0 20px 40px rgba(0,0,0,.25));"
+            >
         </div>
     </div>
 </section>
+
+<?php $__env->startPush('head'); ?>
+<style>
+    .hero-scene { position:absolute; inset:0; z-index:0; overflow:hidden; }
+
+    /* Drifting clouds — swap cloud.png for your own art anytime, sizing/animation stays */
+    .hero-cloud { position:absolute; width:700px; height:auto; object-fit:contain; }
+    .hero-cloud-1 { top:8%;  left:-260px; animation:cloudDrift 40s linear infinite; }
+    .hero-cloud-2 { width:300px; top:20%; left:-400px; animation:cloudDrift 50s linear infinite 8s; opacity:.7; }
+    .hero-cloud-3 { width:380px; top:38%; left:-420px; animation:cloudDrift 60s linear infinite 20s; opacity:.5; }
+    .hero-cloud-4 { width:220px; top:55%; left:-320px; animation:cloudDrift 44s linear infinite 30s; opacity:.6; }
+    @keyframes cloudDrift {
+        0%   { transform:translateX(0); }
+        100% { transform:translateX(calc(100vw + 320px)); }
+    }
+
+    /* Dashed flight trails behind the planes (kept as CSS/SVG lines — purely decorative) */
+    .hero-trail { position:absolute; inset:0; width:100%; height:100%; z-index:0; }
+
+    /* Flying planes
+    .hero-plane { position:absolute; width:300px; height:auto; object-fit:contain; will-change:transform; }
+    .hero-plane-1 { top:35%; left:-100px; animation:plane1Move 15s linear infinite; }
+    .hero-plane-2 { width:66px; top:70%; left:-60px; animation:plane2Move 34s linear infinite 10s; }
+    @keyframes plane1Move {
+        0%   { transform:translate(0,0) rotate(-18deg); opacity:0; }
+        6%   { opacity:1; }
+        94%  { opacity:1; }
+        100% { transform:translate(calc(100vw + 100px), -260px) rotate(-18deg); opacity:0; }
+    }
+    @keyframes plane2Move {
+        0%   { transform:translate(0,0) rotate(-10deg); opacity:0; }
+        6%   { opacity:1; }
+        94%  { opacity:1; }
+        100% { transform:translate(calc(100vw + 80px), -120px) rotate(-10deg); opacity:0; }
+    } */
+
+    /* City skyline */
+    .hero-skyline { position:absolute; left:0; right:0; bottom:60px; width:100%; height:22%; min-height:140px; object-fit:cover; object-position:bottom; }
+
+    /* Road with moving lane markings + driving truck */
+    .hero-road { position:absolute; left:0; right:0; bottom:0; height:60px; background:linear-gradient(to bottom, rgba(9,20,50,.6), rgba(9,20,50,.85)); }
+    .hero-road::after {
+        content:''; position:absolute; top:50%; left:0; right:0; height:2px;
+        background:repeating-linear-gradient(90deg, rgba(255,255,255,.5) 0 24px, transparent 24px 48px);
+        animation:roadLines 1.4s linear infinite;
+    }
+    @keyframes roadLines { 0% { background-position:0 0; } 100% { background-position:-48px 0; } }
+    .hero-truck { position:absolute; width:130px; height:auto; object-fit:contain; bottom:14px; left:-160px; animation:truckDrive 18s linear infinite 3s; }
+    @keyframes truckDrive {
+        0%   { transform:translateX(0); opacity:0; }
+        6%   { opacity:1; }
+        94%  { opacity:1; }
+        100% { transform:translateX(calc(100vw + 200px)); opacity:0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .hero-cloud, .hero-plane, .hero-truck { animation:none !important; }
+        .hero-road::after { animation:none !important; }
+    }
+</style>
+<?php $__env->stopPush(); ?>
 
 
 <?php if($subsidiaries->count()): ?>
