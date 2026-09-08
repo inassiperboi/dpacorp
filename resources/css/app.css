@@ -82,10 +82,9 @@ body {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ─────────────────────────────────────────────────────────────────
    NAVBAR BRAND
-   Logo + nama HARUS ke samping
-   ═══════════════════════════════════════════════════════════════════ */
+   ───────────────────────────────────────────────────────────────── */
 
 .navbar-brand {
     display: flex !important;
@@ -106,8 +105,6 @@ body {
 
     text-decoration: none;
 
-    /* biar logo+teks tidak pernah kalah rebutan tempat sama nav */
-    min-width: 0;
     overflow: visible;
 }
 
@@ -166,39 +163,23 @@ body {
 
 /* ─────────────────────────────────────────────────────────────────
    BRAND TEXT
-   ═══════════════════════════════════════════════════════════════════
-   PT Dharma Putra Airlangga = SATU BARIS
-   font-size pakai clamp() supaya otomatis mengecil di layar sempit
-   dan TIDAK PERNAH wrap ke baris kedua.
    ───────────────────────────────────────────────────────────────── */
 
 .navbar-brand .brand-text {
-    display: inline-block !important;
+    display: block;
 
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(11px, 3.2vw, 15px);
+    font-size: clamp(16px, 2vw, 20px);
+
     font-weight: 700;
+
     line-height: 1.2;
 
     color: var(--primary);
 
-    /* PENTING */
-    width: auto !important;
-    min-width: max-content !important;
-    max-width: none !important;
+    white-space: nowrap;
 
-    white-space: nowrap !important;
-    word-break: normal !important;
-    overflow-wrap: normal !important;
-
-    flex: 0 0 auto !important;
-    flex-shrink: 0 !important;
-
-    overflow: visible !important;
+    flex-shrink: 0;
 }
-
-
-/* Jika brand menggunakan span */
 
 .navbar-brand .brand-text span {
     color: var(--accent);
@@ -216,15 +197,23 @@ body {
 
     gap: 4px;
 
-    flex-shrink: 0;
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-nav li {
+    list-style: none;
 }
 
 .nav-link {
     display: inline-flex;
 
     align-items: center;
+    justify-content: center;
 
-    padding: 8px 14px;
+    padding: 8px 12px;
 
     border-radius: 8px;
 
@@ -265,6 +254,8 @@ body {
 
 .nav-cta:hover {
     background: var(--primary-light) !important;
+
+    color: #fff !important;
 }
 
 
@@ -282,6 +273,10 @@ body {
     cursor: pointer;
 
     padding: 8px;
+
+    border: none;
+
+    background: transparent;
 }
 
 .hamburger span {
@@ -413,6 +408,46 @@ footer {
     color: var(--accent);
 }
 
+.footer-map-card {
+    margin-top: 8px;
+    margin-bottom: 14px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.footer-map-link {
+    display: block;
+    width: 100%;
+    height: 150px;
+    text-decoration: none;
+}
+
+.footer-map-link iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #dfeaf6;
+}
+
+.footer-address-link {
+    display: block;
+    padding: 10px 12px 12px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+.footer-address-link:hover {
+    color: rgba(255, 255, 255, 0.95);
+}
+
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 
@@ -461,71 +496,128 @@ h2.section-title {
 
     font-size: 36px;
 
+    line-height: 1.25;
+
     font-weight: 700;
 
     color: var(--primary);
 
-    margin-bottom: 14px;
-
-    line-height: 1.2;
+    margin-bottom: 16px;
 }
 
-.section-subtitle {
-    font-size: 16px;
+.section-desc {
+    max-width: 680px;
+
+    margin-bottom: 40px;
+
+    font-size: 15px;
 
     color: var(--text-muted);
-
-    max-width: 600px;
 
     line-height: 1.7;
 }
 
 
 /* ═══════════════════════════════════════════════════════════════════
-   BREADCRUMB
+   HERO
    ═══════════════════════════════════════════════════════════════════ */
 
-.breadcrumb-bar {
-    background: var(--bg);
+.hero {
+    min-height: 620px;
 
-    padding: 14px 5%;
+    display: flex;
 
-    border-bottom: 1px solid var(--border);
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(26, 58, 110, 0.96),
+            rgba(41, 82, 163, 0.90)
+        );
 }
 
-.breadcrumb-list {
-    display: flex;
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 760px;
+}
+
+.hero-label {
+    display: inline-flex;
 
     align-items: center;
 
     gap: 8px;
 
-    font-size: 13px;
+    padding: 6px 12px;
 
-    color: var(--text-muted);
+    border-radius: 20px;
 
-    list-style: none;
+    background: rgba(232, 160, 32, 0.15);
+
+    color: var(--accent-light);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 16px;
+}
+
+.hero h1 {
+    font-family: 'Poppins', sans-serif;
+
+    font-size: clamp(36px, 5vw, 64px);
+
+    line-height: 1.1;
+
+    font-weight: 700;
+
+    color: #fff;
+
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: var(--accent);
+}
+
+.hero p {
+    max-width: 650px;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    color: rgba(255, 255, 255, 0.82);
+
+    margin-bottom: 28px;
+}
+
+.hero-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
 
     flex-wrap: wrap;
 }
 
-.breadcrumb-list a {
-    color: var(--primary-light);
-
-    text-decoration: none;
-}
-
-.breadcrumb-list li:not(:last-child)::after {
-    content: '/';
-
-    margin-left: 8px;
-
-    opacity: 0.4;
-}
-
 
 /* ═══════════════════════════════════════════════════════════════════
-   BUTTONS
+   PUBLIC BUTTONS
    ═══════════════════════════════════════════════════════════════════ */
 
 .btn-pub {
@@ -533,23 +625,25 @@ h2.section-title {
 
     align-items: center;
 
+    justify-content: center;
+
     gap: 8px;
 
-    padding: 13px 28px;
+    padding: 11px 20px;
 
-    border-radius: 10px;
+    border-radius: 8px;
 
-    font-size: 15px;
+    font-size: 13px;
 
     font-weight: 600;
 
     text-decoration: none;
 
-    transition: all 0.2s;
-
     cursor: pointer;
 
     border: none;
+
+    transition: all 0.2s;
 }
 
 .btn-pub-primary {
@@ -617,6 +711,46 @@ h2.section-title {
 
 
 /* ═══════════════════════════════════════════════════════════════════
+   PUBLIC GRID
+   ═══════════════════════════════════════════════════════════════════ */
+
+.grid-pub {
+    display: grid;
+
+    gap: 24px;
+}
+
+.grid-pub-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-pub-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-pub-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   PUBLIC TEXT
+   ═══════════════════════════════════════════════════════════════════ */
+
+.text-muted-pub {
+    color: var(--text-muted);
+}
+
+.text-primary-pub {
+    color: var(--primary);
+}
+
+.text-accent-pub {
+    color: var(--accent);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
    RESPONSIVE — TABLET
    ═══════════════════════════════════════════════════════════════════ */
 
@@ -638,6 +772,10 @@ h2.section-title {
 
     .nav-cta {
         padding: 8px 14px !important;
+    }
+
+    .grid-pub-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
@@ -668,6 +806,8 @@ h2.section-title {
 
         flex-direction: column;
 
+        align-items: stretch;
+
         padding: 12px;
 
         border-bottom: 1px solid var(--border);
@@ -683,12 +823,16 @@ h2.section-title {
         width: 100%;
 
         padding: 12px 14px;
+
+        justify-content: flex-start;
     }
 
     .nav-cta {
         width: 100%;
 
         text-align: center;
+
+        justify-content: center;
     }
 
     .hamburger {
@@ -706,6 +850,14 @@ h2.section-title {
     h2.section-title {
         font-size: 28px;
     }
+
+    .grid-pub-3 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero {
+        min-height: 560px;
+    }
 }
 
 
@@ -722,10 +874,8 @@ h2.section-title {
     .navbar-brand {
         gap: 8px;
 
-        /*
-         * Tetap horizontal
-         */
         flex-direction: row !important;
+
         flex-wrap: nowrap !important;
     }
 
@@ -743,10 +893,43 @@ h2.section-title {
         flex: 0 0 38px !important;
     }
 
-    /* font-size brand-text TIDAK di-override lagi di sini,
-       biar clamp() di atas yang mengatur otomatis */
+    .navbar-brand .brand-text {
+        font-size: 16px;
+    }
 
     .footer-grid {
         grid-template-columns: 1fr;
+    }
+
+    .grid-pub-2,
+    .grid-pub-3,
+    .grid-pub-4 {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 50px 4%;
+    }
+
+    .hero {
+        min-height: 520px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .hero-actions .btn-pub {
+        width: 100%;
     }
 }

@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3>👥 Struktur Manajemen</h3>
+        <h3>Struktur Manajemen</h3>
         <a href="{{ route('admin.management.create') }}" class="btn btn-primary btn-sm">+ Tambah Anggota</a>
     </div>
     <div class="table-wrapper">

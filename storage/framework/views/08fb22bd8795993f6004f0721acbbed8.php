@@ -313,8 +313,14 @@
                         
                         <?php if(!empty($company->instagram)): ?>
 
+                            <?php
+                                $footerInstagramUrl = preg_match('/^https?:\/\//i', $company->instagram)
+                                    ? $company->instagram
+                                    : 'https://instagram.com/' . ltrim($company->instagram, '@');
+                            ?>
+
                             <a
-                                href="https://instagram.com/<?php echo e(ltrim($company->instagram, '@')); ?>"
+                                href="<?php echo e($footerInstagramUrl); ?>"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="footer-social"
@@ -330,8 +336,14 @@
                         
                         <?php if(!empty($company->tiktok)): ?>
 
+                            <?php
+                                $footerTiktokUrl = preg_match('/^https?:\/\//i', $company->tiktok)
+                                    ? $company->tiktok
+                                    : 'https://www.tiktok.com/@' . ltrim($company->tiktok, '@');
+                            ?>
+
                             <a
-                                href="https://tiktok.com/{{ ltrim($company->tiktok, '@') }}"
+                                href="<?php echo e($footerTiktokUrl); ?>"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="footer-social"
@@ -435,20 +447,10 @@
                 </a>
 
 
-                <a
-                    href="<?php echo e(url('/client')); ?>"
-                    class="footer-link"
-                >
-                    Client Kami
-                </a>
+                
 
 
-                <a
-                    href="<?php echo e(url('/kontak')); ?>"
-                    class="footer-link"
-                >
-                    Kontak
-                </a>
+                
 
             </div>
 
@@ -461,16 +463,38 @@
                     Kontak
                 </div>
 
-
                 <?php if(isset($company) && $company): ?>
 
                     
                     <?php if(!empty($company->alamat)): ?>
 
-                        <p style="font-size:13px;margin-bottom:8px;">
-                            <?php echo e($company->alamat); ?>
+                        <?php
+                            $footerAddressText = trim(($company->alamat ?? '') . ' ' . ($company->kota ?? '') . ' ' . ($company->kode_pos ?? ''));
+                            $footerAddressQuery = urlencode($footerAddressText);
+                            $footerMapsUrl = !empty($company->maps_url)
+                                ? $company->maps_url
+                                : ((!empty($company->lat) && !empty($company->lng))
+                                    ? 'https://www.google.com/maps?q=' . $company->lat . ',' . $company->lng
+                                    : 'https://www.google.com/maps?q=' . $footerAddressQuery);
+                            $footerMapEmbed = 'https://www.google.com/maps?q=' . $footerAddressQuery . '&output=embed';
+                        ?>
 
-                        </p>
+                        <div class="footer-map-card">
+                            <a
+                                href="<?php echo e($footerMapsUrl); ?>"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="footer-map-link"
+                                aria-label="Buka lokasi di Google Maps"
+                            >
+                                <iframe
+                                    src="<?php echo e($footerMapEmbed); ?>"
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    title="Peta lokasi <?php echo e($company->nama_singkat ?? 'DPA Corp'); ?>">
+                                </iframe>
+                            </a>
+                        </div>
 
                     <?php endif; ?>
 

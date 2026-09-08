@@ -342,8 +342,14 @@
                         {{-- Instagram --}}
                         @if(!empty($company->instagram))
 
+                            @php
+                                $footerInstagramUrl = preg_match('/^https?:\/\//i', $company->instagram)
+                                    ? $company->instagram
+                                    : 'https://instagram.com/' . ltrim($company->instagram, '@');
+                            @endphp
+
                             <a
-                                href="https://instagram.com/{{ ltrim($company->instagram, '@') }}"
+                                href="{{ $footerInstagramUrl }}"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="footer-social"
@@ -359,8 +365,14 @@
                         {{-- TikTok --}}
                         @if(!empty($company->tiktok))
 
+                            @php
+                                $footerTiktokUrl = preg_match('/^https?:\/\//i', $company->tiktok)
+                                    ? $company->tiktok
+                                    : 'https://www.tiktok.com/@' . ltrim($company->tiktok, '@');
+                            @endphp
+
                             <a
-                                href="https://tiktok.com/@{{ ltrim($company->tiktok, '@') }}"
+                                href="{{ $footerTiktokUrl }}"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="footer-social"
@@ -468,20 +480,20 @@
                 </a>
 
 
-                <a
+                {{-- <a
                     href="{{ url('/client') }}"
                     class="footer-link"
                 >
                     Client Kami
-                </a>
+                </a> --}}
 
 
-                <a
+                {{-- <a
                     href="{{ url('/kontak') }}"
                     class="footer-link"
                 >
                     Kontak
-                </a>
+                </a> --}}
 
             </div>
 
@@ -496,15 +508,38 @@
                     Kontak
                 </div>
 
-
                 @if(isset($company) && $company)
 
-                    {{-- Alamat --}}
+                    {{-- Alamat dengan preview map --}}
                     @if(!empty($company->alamat))
 
-                        <p style="font-size:13px;margin-bottom:8px;">
-                            {{ $company->alamat }}
-                        </p>
+                        @php
+                            $footerAddressText = trim(($company->alamat ?? '') . ' ' . ($company->kota ?? '') . ' ' . ($company->kode_pos ?? ''));
+                            $footerAddressQuery = urlencode($footerAddressText);
+                            $footerMapsUrl = !empty($company->maps_url)
+                                ? $company->maps_url
+                                : ((!empty($company->lat) && !empty($company->lng))
+                                    ? 'https://www.google.com/maps?q=' . $company->lat . ',' . $company->lng
+                                    : 'https://www.google.com/maps?q=' . $footerAddressQuery);
+                            $footerMapEmbed = 'https://www.google.com/maps?q=' . $footerAddressQuery . '&output=embed';
+                        @endphp
+
+                        <div class="footer-map-card">
+                            <a
+                                href="{{ $footerMapsUrl }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="footer-map-link"
+                                aria-label="Buka lokasi di Google Maps"
+                            >
+                                <iframe
+                                    src="{{ $footerMapEmbed }}"
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    title="Peta lokasi {{ $company->nama_singkat ?? 'DPA Corp' }}">
+                                </iframe>
+                            </a>
+                        </div>
 
                     @endif
 

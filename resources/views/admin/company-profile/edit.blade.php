@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('page-title', 'Profil Perusahaan')
-@section('breadcrumb') / Profil Perusahaan@endsection
+{{-- @section('breadcrumb') / Profil Perusahaan@endsection --}}
 
 @section('content')
 
@@ -9,7 +9,7 @@
 {{-- Profil Utama --}}
 <div class="card">
     <div class="card-header">
-        <h3>🏢 Data Profil Perusahaan</h3>
+        <h3> Data Profil Perusahaan</h3>
         @if($company)
             <span class="badge badge-success">Data tersedia</span>
         @else
@@ -57,19 +57,13 @@
                     <input type="text" name="kode_pos" class="form-control" value="{{ old('kode_pos', $company->kode_pos ?? '') }}">
                 </div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                <div class="form-group">
-                    <label class="form-label">Koordinat Latitude</label>
-                    <input type="text" name="lat" class="form-control"
-                           value="{{ old('lat', $company->lat ?? '') }}" placeholder="-7.261553">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Koordinat Longitude</label>
-                    <input type="text" name="lng" class="form-control"
-                           value="{{ old('lng', $company->lng ?? '') }}" placeholder="112.740793">
-                </div>
+            <div class="form-group">
+                <label class="form-label">Link Google Maps</label>
+                <input type="url" name="maps_url" class="form-control"
+                       value="{{ old('maps_url', $company->maps_url ?? '') }}"
+                       placeholder="https://maps.app.goo.gl/Y9HEGURY447J9xSD7">
             </div>
-            <div class="form-hint" style="margin-bottom:16px;">💡 Dapatkan koordinat dari Google Maps → klik kanan di lokasi → "What's here?"</div>
+            <div class="form-hint" style="margin-bottom:16px;">💡 Salin link lokasi dari Google Maps, misalnya https://maps.app.goo.gl/Y9HEGURY447J9xSD7</div>
 
             <hr style="border:none;border-top:1px solid var(--border);margin:16px 0;">
 
@@ -89,8 +83,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Jam Operasional</label>
-                    <input type="text" name="jam_operasional" class="form-control"
-                           value="{{ old('jam_operasional', $company->jam_operasional ?? '') }}" placeholder="Senin–Jumat: 08.00–17.00 WIB">
+                    <textarea name="jam_operasional" class="form-control" rows="3" placeholder="Senin – Kamis: 08.00 – 16.30 WIB&#10;Jumat: 08.00 – 17.00 WIB">{{ old('jam_operasional', $company->jam_operasional ?? '') }}</textarea>
                 </div>
             </div>
 
@@ -98,14 +91,14 @@
 
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
                 <div class="form-group">
-                    <label class="form-label">Instagram</label>
-                    <input type="text" name="instagram" class="form-control"
-                           value="{{ old('instagram', $company->instagram ?? '') }}" placeholder="@username">
+                    <label class="form-label">Instagram URL</label>
+                    <input type="url" name="instagram" class="form-control"
+                           value="{{ old('instagram', $company->instagram ?? '') }}" placeholder="https://instagram.com/username">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">TikTok</label>
-                    <input type="text" name="tiktok" class="form-control"
-                           value="{{ old('tiktok', $company->tiktok ?? '') }}" placeholder="@username">
+                    <label class="form-label">TikTok URL</label>
+                    <input type="url" name="tiktok" class="form-control"
+                           value="{{ old('tiktok', $company->tiktok ?? '') }}" placeholder="https://www.tiktok.com/@username">
                 </div>
                 <div class="form-group">
                     <label class="form-label">YouTube</label>
@@ -141,7 +134,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">💾 Simpan Profil Perusahaan</button>
+            <button type="submit" class="btn btn-primary"> Simpan Profil Perusahaan</button>
         </div>
     </form>
 </div>

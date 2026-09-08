@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('page-title', 'Legalitas & KBLI')
-@section('breadcrumb') / <a href="{{ route('admin.about.legal') }}">Tentang Kami</a> / Legalitas@endsection
+{{-- @section('breadcrumb') / <a href="{{ route('admin.about.legal') }}">Tentang Kami</a> / Legalitas@endsection --}}
 
 @section('content')
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
@@ -8,7 +8,7 @@
     {{-- Dokumen Legalitas --}}
     <div style="display:flex;flex-direction:column;gap:20px;">
         <div class="card">
-            <div class="card-header"><h3>📄 Tambah Dokumen Legal</h3></div>
+            <div class="card-header"><h3>Tambah Dokumen Legal</h3></div>
             <div class="card-body">
                 <form action="{{ route('admin.about.legal.store') }}" method="POST">
                     @csrf
@@ -59,7 +59,7 @@
     <div style="display:flex;flex-direction:column;gap:20px;">
         <div class="card">
             <div class="card-header">
-                <h3>📋 Daftar Dokumen Legal</h3>
+                <h3>Daftar Dokumen Legal</h3>
                 <span class="badge badge-info">{{ $legals->count() }} dokumen</span>
             </div>
             @if($legals->isEmpty())
@@ -85,7 +85,7 @@
 
         {{-- KBLI --}}
         <div class="card">
-            <div class="card-header"><h3>🏷️ Tambah Kode KBLI</h3></div>
+            <div class="card-header"><h3>Tambah Kode KBLI</h3></div>
             <div class="card-body">
                 <form action="{{ route('admin.about.kbli.store') }}" method="POST">
                     @csrf
@@ -110,7 +110,7 @@
 
         <div class="card">
             <div class="card-header">
-                <h3>📊 Daftar Kode KBLI</h3>
+                <h3>Daftar Kode KBLI</h3>
                 <span class="badge badge-info">{{ $kbliItems->count() }} kode</span>
             </div>
             @foreach($kbliItems as $kbli)

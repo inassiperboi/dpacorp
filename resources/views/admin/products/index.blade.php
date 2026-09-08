@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3>📦 Daftar Produk & Layanan</h3>
+        <h3>Daftar Produk & Layanan</h3>
         <a href="{{ route('admin.products.create') }}" class="btn btn-primary btn-sm">+ Tambah Produk</a>
     </div>
     <div class="table-wrapper">

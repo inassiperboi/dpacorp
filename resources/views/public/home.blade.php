@@ -134,7 +134,7 @@
         animation:roadLines 1.4s linear infinite;
     }
     @keyframes roadLines { 0% { background-position:0 0; } 100% { background-position:-48px 0; } }
-    .hero-truck { position:absolute; width:130px; height:auto; object-fit:contain; bottom:14px; left:-160px; animation:truckDrive 18s linear infinite 3s; }
+    .hero-truck { position:absolute; width:200px; height:auto; object-fit:contain; bottom:14px; left:-160px; animation:truckDrive 18s linear infinite 3s; }
     @keyframes truckDrive {
         0%   { transform:translateX(0); opacity:0; }
         6%   { opacity:1; }

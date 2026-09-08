@@ -1,13 +1,13 @@
 @extends('admin.layouts.app')
 @section('page-title', 'Visi & Misi')
-@section('breadcrumb') / <a href="{{ route('admin.about.vision-mission') }}">Tentang Kami</a> / Visi & Misi@endsection
+{{-- @section('breadcrumb') / <a href="{{ route('admin.about.vision-mission') }}">Tentang Kami</a> / Visi & Misi@endsection --}}
 
 @section('content')
 <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:20px;align-items:start;">
 
     {{-- Visi --}}
     <div class="card">
-        <div class="card-header"><h3>🎯 Visi Perusahaan</h3></div>
+        <div class="card-header"><h3>Visi Perusahaan</h3></div>
         <div class="card-body">
             <form action="{{ route('admin.about.vision.update') }}" method="POST">
                 @csrf @method('PUT')
@@ -17,7 +17,7 @@
                               placeholder="Tuliskan visi perusahaan di sini...">{{ old('isi_visi', $vision->isi_visi ?? '') }}</textarea>
                     <div class="form-hint">Visi adalah cita-cita jangka panjang perusahaan.</div>
                 </div>
-                <button type="submit" class="btn btn-primary">💾 Simpan Visi</button>
+                <button type="submit" class="btn btn-primary">Simpan Visi</button>
             </form>
         </div>
     </div>
@@ -46,7 +46,7 @@
 
         <div class="card">
             <div class="card-header">
-                <h3>📋 Daftar Poin Misi</h3>
+                <h3>Daftar Poin Misi</h3>
                 <span class="badge badge-info">{{ $missions->count() }} poin</span>
             </div>
             @if($missions->isEmpty())

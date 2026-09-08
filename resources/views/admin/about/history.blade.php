@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('page-title', 'Sejarah & Timeline')
-@section('breadcrumb') / <a href="{{ route('admin.about.history') }}">Tentang Kami</a> / Sejarah@endsection
+{{-- @section('breadcrumb') / <a href="{{ route('admin.about.history') }}">Tentang Kami</a> / Sejarah@endsection --}}
 
 @section('content')
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;">
@@ -37,7 +37,7 @@
     {{-- Daftar Timeline --}}
     <div class="card">
         <div class="card-header">
-            <h3>📅 Timeline Sejarah</h3>
+            <h3>Timeline Sejarah</h3>
             <span class="badge badge-info">{{ $timelines->count() }} item</span>
         </div>
         @if($timelines->isEmpty())
