@@ -18,20 +18,23 @@
             <div class="card-body">
                 <div class="form-group">
                     <label class="form-label">Nama Perusahaan <span class="required">*</span></label>
-                    <input type="text" name="nama" class="form-control" value="{{ old('nama', $subsidiary->nama ?? '') }}" required>
+                    <input type="text" name="nama" class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}" value="{{ old('nama', $subsidiary->nama ?? '') }}" required>
                     @error('nama')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label">Deskripsi Singkat (untuk card)</label>
-                    <textarea name="deskripsi_singkat" class="form-control" rows="3">{{ old('deskripsi_singkat', $subsidiary->deskripsi_singkat ?? '') }}</textarea>
+                    <textarea name="deskripsi_singkat" class="form-control {{ $errors->has('deskripsi_singkat') ? 'is-invalid' : '' }}" rows="3">{{ old('deskripsi_singkat', $subsidiary->deskripsi_singkat ?? '') }}</textarea>
+                    @error('deskripsi_singkat')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label">Deskripsi Lengkap</label>
-                    <textarea name="deskripsi_lengkap" class="form-control" rows="5">{{ old('deskripsi_lengkap', $subsidiary->deskripsi_lengkap ?? '') }}</textarea>
+                    <textarea name="deskripsi_lengkap" class="form-control {{ $errors->has('deskripsi_lengkap') ? 'is-invalid' : '' }}" rows="5">{{ old('deskripsi_lengkap', $subsidiary->deskripsi_lengkap ?? '') }}</textarea>
+                    @error('deskripsi_lengkap')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label">Alamat</label>
-                    <textarea name="alamat" class="form-control" rows="2">{{ old('alamat', $subsidiary->alamat ?? '') }}</textarea>
+                    <textarea name="alamat" class="form-control {{ $errors->has('alamat') ? 'is-invalid' : '' }}" rows="2">{{ old('alamat', $subsidiary->alamat ?? '') }}</textarea>
+                    @error('alamat')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
             </div>
         </div>
@@ -41,15 +44,18 @@
             <div class="card-body">
                 <div class="form-group">
                     <label class="form-label">Tanggal Pendirian</label>
-                    <input type="date" name="tanggal_pendirian" class="form-control" value="{{ old('tanggal_pendirian', isset($subsidiary->tanggal_pendirian) ? $subsidiary->tanggal_pendirian->format('Y-m-d') : '') }}">
+                    <input type="date" name="tanggal_pendirian" class="form-control {{ $errors->has('tanggal_pendirian') ? 'is-invalid' : '' }}" value="{{ old('tanggal_pendirian', isset($subsidiary->tanggal_pendirian) ? $subsidiary->tanggal_pendirian->format('Y-m-d') : '') }}">
+                    @error('tanggal_pendirian')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label">No. Akta Pendirian</label>
-                    <input type="text" name="no_akta" class="form-control" value="{{ old('no_akta', $subsidiary->no_akta ?? '') }}">
+                    <input type="text" name="no_akta" class="form-control {{ $errors->has('no_akta') ? 'is-invalid' : '' }}" value="{{ old('no_akta', $subsidiary->no_akta ?? '') }}">
+                    @error('no_akta')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label">No. SK Kemenkumham</label>
-                    <input type="text" name="no_sk_kemenkumham" class="form-control" value="{{ old('no_sk_kemenkumham', $subsidiary->no_sk_kemenkumham ?? '') }}">
+                    <input type="text" name="no_sk_kemenkumham" class="form-control {{ $errors->has('no_sk_kemenkumham') ? 'is-invalid' : '' }}" value="{{ old('no_sk_kemenkumham', $subsidiary->no_sk_kemenkumham ?? '') }}">
+                    @error('no_sk_kemenkumham')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
             </div>
         </div>
@@ -59,11 +65,13 @@
             <div class="card-body">
                 <div class="form-group">
                     <label class="form-label">Meta Title</label>
-                    <input type="text" name="meta_title" class="form-control" value="{{ old('meta_title', $subsidiary->meta_title ?? '') }}" placeholder="Judul di Google (maks 60 karakter)">
+                    <input type="text" name="meta_title" class="form-control {{ $errors->has('meta_title') ? 'is-invalid' : '' }}" value="{{ old('meta_title', $subsidiary->meta_title ?? '') }}" placeholder="Judul di Google (maks 60 karakter)">
+                    @error('meta_title')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label">Meta Description</label>
-                    <textarea name="meta_description" class="form-control" rows="2" placeholder="Deskripsi singkat (maks 160 karakter)">{{ old('meta_description', $subsidiary->meta_description ?? '') }}</textarea>
+                    <textarea name="meta_description" class="form-control {{ $errors->has('meta_description') ? 'is-invalid' : '' }}" rows="2" placeholder="Deskripsi singkat (maks 160 karakter)">{{ old('meta_description', $subsidiary->meta_description ?? '') }}</textarea>
+                    @error('meta_description')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
             </div>
         </div>
@@ -79,18 +87,14 @@
                     @if(isset($subsidiary) && $subsidiary->logo)
                         <img src="{{ Storage::url($subsidiary->logo) }}" alt="" style="height:60px;margin-bottom:8px;display:block;border-radius:6px;">
                     @endif
-                    <input type="file" name="logo" class="form-control" accept="image/*">
+                    <input type="file" name="logo" class="form-control {{ $errors->has('logo') ? 'is-invalid' : '' }}" accept="image/*">
+                    <div class="form-hint">Maks 2MB, format gambar (jpg/png/webp). Logo ini yang tampil di kartu &amp; header website.</div>
+                    @error('logo')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label">Alt Text Logo</label>
-                    <input type="text" name="logo_alt" class="form-control" value="{{ old('logo_alt', $subsidiary->logo_alt ?? '') }}" placeholder="Logo PT ...">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Cover Image (Banner Card)</label>
-                    @if(isset($subsidiary) && $subsidiary->cover_image)
-                        <img src="{{ Storage::url($subsidiary->cover_image) }}" alt="" style="height:80px;width:100%;object-fit:cover;margin-bottom:8px;border-radius:6px;">
-                    @endif
-                    <input type="file" name="cover_image" class="form-control" accept="image/*">
+                    <input type="text" name="logo_alt" class="form-control {{ $errors->has('logo_alt') ? 'is-invalid' : '' }}" value="{{ old('logo_alt', $subsidiary->logo_alt ?? '') }}" placeholder="Logo PT ...">
+                    @error('logo_alt')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
             </div>
         </div>
@@ -102,27 +106,33 @@
                     <label class="form-label">Website URL <span style="font-size:11px;color:var(--text-muted);">(kosong = tampilkan modal info)</span></label>
                     <input type="url" name="website_url" class="form-control {{ $errors->has('website_url') ? 'is-invalid' : '' }}"
                            value="{{ old('website_url', $subsidiary->website_url ?? '') }}" placeholder="https://www.contoh.com">
+                    <div class="form-hint">Wajib diawali https:// atau http://, kalau tidak akan dianggap tidak valid.</div>
                     @error('website_url')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control" value="{{ old('email', $subsidiary->email ?? '') }}">
+                    <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ old('email', $subsidiary->email ?? '') }}">
+                    @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label">WhatsApp</label>
-                    <input type="text" name="whatsapp" class="form-control" value="{{ old('whatsapp', $subsidiary->whatsapp ?? '') }}" placeholder="628xxxxxxxxxx">
+                    <input type="text" name="whatsapp" class="form-control {{ $errors->has('whatsapp') ? 'is-invalid' : '' }}" value="{{ old('whatsapp', $subsidiary->whatsapp ?? '') }}" placeholder="628xxxxxxxxxx">
+                    @error('whatsapp')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label">Instagram</label>
-                    <input type="text" name="instagram" class="form-control" value="{{ old('instagram', $subsidiary->instagram ?? '') }}" placeholder="@username">
+                    <input type="text" name="instagram" class="form-control {{ $errors->has('instagram') ? 'is-invalid' : '' }}" value="{{ old('instagram', $subsidiary->instagram ?? '') }}" placeholder="@username">
+                    @error('instagram')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label">TikTok</label>
-                    <input type="text" name="tiktok" class="form-control" value="{{ old('tiktok', $subsidiary->tiktok ?? '') }}">
+                    <input type="text" name="tiktok" class="form-control {{ $errors->has('tiktok') ? 'is-invalid' : '' }}" value="{{ old('tiktok', $subsidiary->tiktok ?? '') }}">
+                    @error('tiktok')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
                     <label class="form-label">YouTube</label>
-                    <input type="text" name="youtube" class="form-control" value="{{ old('youtube', $subsidiary->youtube ?? '') }}">
+                    <input type="text" name="youtube" class="form-control {{ $errors->has('youtube') ? 'is-invalid' : '' }}" value="{{ old('youtube', $subsidiary->youtube ?? '') }}">
+                    @error('youtube')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
             </div>
         </div>
