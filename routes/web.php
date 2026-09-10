@@ -202,4 +202,5 @@ Route::prefix('panel')->name('admin.')->middleware(['web', 'admin.auth'])->group
     Route::get('/pesan/{contactMessage}', [ContactMessageController::class, 'show'])->name('contacts.show');
     Route::delete('/pesan/{contactMessage}', [ContactMessageController::class, 'destroy'])->name('contacts.destroy');
     Route::post('/pesan/{contactMessage}/baca', [ContactMessageController::class, 'markRead'])->name('contacts.mark-read');
+    Route::patch('/pesan/{contactMessage}/status', [ContactMessageController::class, 'updateStatus'])->name('contacts.update-status');
 });

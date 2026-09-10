@@ -648,6 +648,49 @@
 
 
         /* ─────────────────────────────────────────────
+           STATUS SELECT (badge berwarna, bisa diklik)
+        ───────────────────────────────────────────── */
+
+        .status-select {
+            appearance: none;
+            -webkit-appearance: none;
+
+            border: none;
+            outline: none;
+
+            padding: 4px 26px 4px 10px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+            font-weight: 600;
+            font-family: inherit;
+
+            cursor: pointer;
+
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 10px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23334155' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        }
+
+        .status-select-danger {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-select-warning {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-select-success {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+
+        /* ─────────────────────────────────────────────
            TOGGLE
         ───────────────────────────────────────────── */
 

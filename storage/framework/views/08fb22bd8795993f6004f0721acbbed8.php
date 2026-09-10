@@ -254,12 +254,7 @@
             </a>
 
 
-            <a
-                href="<?php echo e(url('/kontak')); ?>"
-                class="nav-link nav-cta <?php echo e(request()->is('kontak') ? 'active' : ''); ?>"
-            >
-                Kontak
-            </a>
+            
 
         </div>
 
@@ -298,9 +293,15 @@
 
             <div id="footer-contact">
 
-                <div class="footer-brand">
-                    DPA <span>Corp</span>
-                </div>
+                <a href="<?php echo e(url('/')); ?>" class="footer-brand">
+                    <img
+                        src="<?php echo e(asset('images/hero/logo.png')); ?>"
+                        alt="Logo PT Dharma Putra Airlangga"
+                        width="46"
+                        height="46"
+                    >
+                    <span class="footer-brand-text">PT Dharma Putra Airlangga</span>
+                </a>
 
 
                 <p class="footer-desc">
@@ -335,7 +336,11 @@
                                 title="Instagram"
                                 aria-label="Instagram"
                             >
-                                📷
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" stroke="currentColor" stroke-width="1.8"/>
+                                    <circle cx="12" cy="12" r="4.3" stroke="currentColor" stroke-width="1.8"/>
+                                    <circle cx="17.4" cy="6.6" r="1.15" fill="currentColor"/>
+                                </svg>
                             </a>
 
                         <?php endif; ?>
@@ -358,7 +363,9 @@
                                 title="TikTok"
                                 aria-label="TikTok"
                             >
-                                🎵
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.8 3.5c.5 1.9 1.8 3.2 3.7 3.4v2.7c-1.4.1-2.7-.3-3.7-1v6.1c0 3-2.4 5.3-5.3 5.3-3 0-5.3-2.4-5.3-5.3 0-3 2.4-5.3 5.3-5.3.3 0 .6 0 .9.1v2.8a2.6 2.6 0 00-.9-.2 2.6 2.6 0 100 5.2c1.4 0 2.6-1.1 2.6-2.6V3.5h2.7z" fill="currentColor"/>
+                                </svg>
                             </a>
 
                         <?php endif; ?>
@@ -375,7 +382,10 @@
                                 title="YouTube"
                                 aria-label="YouTube"
                             >
-                                ▶️
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="2.5" y="5.5" width="19" height="13" rx="4" stroke="currentColor" stroke-width="1.8"/>
+                                    <path d="M10.3 9.6l4.6 2.4-4.6 2.4V9.6z" fill="currentColor"/>
+                                </svg>
                             </a>
 
                         <?php endif; ?>
@@ -383,90 +393,6 @@
                     </div>
 
                 <?php endif; ?>
-
-            </div>
-
-
-            
-
-            <div>
-
-                <div class="footer-heading">
-                    Navigasi
-                </div>
-
-
-                <a
-                    href="<?php echo e(url('/')); ?>"
-                    class="footer-link"
-                >
-                    Beranda
-                </a>
-
-
-                <a
-                    href="<?php echo e(url('/tentang-kami')); ?>"
-                    class="footer-link"
-                >
-                    Tentang Kami
-                </a>
-
-
-                <a
-                    href="<?php echo e(url('/visi-misi')); ?>"
-                    class="footer-link"
-                >
-                    Visi &amp; Misi
-                </a>
-
-
-                <a
-                    href="<?php echo e(url('/struktur-manajemen')); ?>"
-                    class="footer-link"
-                >
-                    Struktur Manajemen
-                </a>
-
-
-                <a
-                    href="<?php echo e(route('public.news.index')); ?>"
-                    class="footer-link"
-                >
-                    Berita &amp; Informasi
-                </a>
-
-            </div>
-
-
-            
-
-            <div>
-
-                <div class="footer-heading">
-                    Layanan
-                </div>
-
-
-                <a
-                    href="<?php echo e(url('/produk-layanan')); ?>"
-                    class="footer-link"
-                >
-                    Produk &amp; Layanan
-                </a>
-
-
-                <a
-                    href="<?php echo e(url('/anak-perusahaan')); ?>"
-                    class="footer-link"
-                >
-                    Anak Perusahaan
-                </a>
-
-
-                
-
-
-                
 
             </div>
 
@@ -516,29 +442,20 @@
 
 
                     
-                    <?php if(!empty($company->telepon)): ?>
-
-                        <a
-                            href="tel:<?php echo e($company->telepon); ?>"
-                            class="footer-link"
-                        >
-                            📞 <?php echo e($company->telepon); ?>
-
-                        </a>
-
-                    <?php endif; ?>
-
-
-                    
                     <?php if(!empty($company->whatsapp)): ?>
 
                         <a
                             href="https://wa.me/<?php echo e(preg_replace('/[^0-9]/', '', $company->whatsapp)); ?>"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="footer-link"
+                            class="footer-link footer-link-icon"
                         >
-                            💬 WhatsApp
+                            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2.5a9.5 9.5 0 00-8.2 14.3L2.5 21.5l4.8-1.3A9.5 9.5 0 1012 2.5z" stroke="currentColor" stroke-width="1.6"/>
+                                <path d="M8.3 8.6c.2-.5.4-.5.6-.5h.5c.2 0 .4 0 .5.4.2.4.6 1.5.7 1.6.1.1.1.3 0 .5-.1.2-.2.3-.3.4-.1.2-.3.3-.1.6.2.4.9 1.4 1.9 2.3 1.3 1.1 2.2 1.5 2.5 1.6.3.1.4.1.6-.1.2-.2.7-.8.9-1 .2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.4 0 .2 0 1.2-.4 1.6-.4.5-1.8 1.1-2.5 1.1-.7 0-2.1-.2-4.1-1.7-2.4-1.9-3.7-4.1-3.9-4.5-.2-.4-1.2-1.8-1.2-3.4 0-1.6.9-2.4 1.1-2.6z" fill="currentColor"/>
+                            </svg>
+                            <?php echo e($company->whatsapp); ?>
+
                         </a>
 
                     <?php endif; ?>
@@ -549,9 +466,13 @@
 
                         <a
                             href="mailto:<?php echo e($company->email); ?>"
-                            class="footer-link"
+                            class="footer-link footer-link-icon"
                         >
-                            ✉️ <?php echo e($company->email); ?>
+                            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" stroke="currentColor" stroke-width="1.6"/>
+                                <path d="M3.5 6l8.5 6.5L20.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <?php echo e($company->email); ?>
 
                         </a>
 

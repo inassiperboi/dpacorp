@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('page-title', 'Pesan Masuk')
-@section('breadcrumb') / Pesan Masuk@endsection
+{{-- @section('breadcrumb') / Pesan Masuk@endsection --}}
 
 @section('content')
 <div class="card">
@@ -22,7 +22,6 @@
                     <th>Pesan</th>
                     <th>Tanggal</th>
                     <th>Status</th>
-                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,31 +32,33 @@
                             <span class="unread-dot"></span>
                         @endif
                     </td>
-                    <td style="font-weight:{{ !$msg->is_read ? '700' : '400' }};">{{ $msg->nama }}</td>
+                    <td style="font-weight:{{ !$msg->is_read ? '700' : '400' }};">
+                        <a href="{{ route('admin.contacts.show', $msg) }}" style="color:inherit;text-decoration:none;">
+                            {{ $msg->nama }}
+                        </a>
+                    </td>
                     <td style="color:var(--text-muted);font-size:12px;">{{ $msg->email }}</td>
                     <td style="max-width:280px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:13px;">
                         {{ $msg->pesan }}
                     </td>
                     <td style="font-size:12px;color:var(--text-muted);white-space:nowrap;">{{ $msg->created_at->format('d M Y H:i') }}</td>
                     <td>
-                        <span class="badge {{ $msg->is_read ? 'badge-success' : 'badge-warning' }}">
-                            {{ $msg->is_read ? 'Dibaca' : 'Baru' }}
-                        </span>
-                    </td>
-                    <td>
-                        <div style="display:flex;gap:6px;">
-                            <a href="{{ route('admin.contacts.show', $msg) }}" class="btn btn-secondary btn-sm">Baca</a>
-                            <form action="{{ route('admin.contacts.destroy', $msg) }}" method="POST">
-                                @csrf @method('DELETE')
-                                <button type="button" class="btn btn-danger btn-sm"
-                                    onclick="confirmDelete(this.closest('form'), 'pesan dari {{ $msg->nama }}')">Hapus</button>
-                            </form>
-                        </div>
+                        <form action="{{ route('admin.contacts.update-status', $msg) }}" method="POST">
+                            @csrf @method('PATCH')
+                            <select name="status" class="status-select status-select-{{ $msg->statusColor() }}"
+                                    onchange="this.className = 'status-select status-select-' + (this.options[this.selectedIndex].dataset.color); this.form.submit();">
+                                @foreach(\App\Models\ContactMessage::statusOptions() as $value => $opt)
+                                    <option value="{{ $value }}" data-color="{{ $opt['color'] }}" {{ $msg->status === $value ? 'selected' : '' }}>
+                                        {{ $opt['label'] }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </form>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" style="text-align:center;padding:40px;color:var(--text-muted);">
+                    <td colspan="6" style="text-align:center;padding:40px;color:var(--text-muted);">
                         Belum ada pesan masuk.
                     </td>
                 </tr>

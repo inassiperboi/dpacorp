@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContactMessage;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ContactMessageController extends Controller
 {
@@ -30,5 +32,17 @@ class ContactMessageController extends Controller
     {
         $contactMessage->update(['is_read' => true]);
         return response()->json(['status' => 'ok']);
+    }
+
+    public function updateStatus(Request $request, ContactMessage $contactMessage)
+    {
+        $validated = $request->validate([
+            'status' => ['required', Rule::in(array_keys(ContactMessage::statusOptions()))],
+        ]);
+
+        $contactMessage->update(['status' => $validated['status']]);
+
+        return redirect()->route('admin.contacts.index')
+            ->with('success', 'Status pesan berhasil diperbarui.');
     }
 }
