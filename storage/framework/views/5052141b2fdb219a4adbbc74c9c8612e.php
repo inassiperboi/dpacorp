@@ -4,7 +4,13 @@
 <?php $__env->startSection('content'); ?>
 
 
-<section class="hero-section" style="min-height:92vh;display:flex;align-items:center;background:linear-gradient(180deg,#0a1e4a 0%,#15316b 45%,#2456a0 100%);position:relative;overflow:hidden;padding:0 5%;">
+<section class="hero-section" style="min-height:92vh;display:flex;align-items:center;background:#000;position:relative;overflow:hidden;padding:0 5%;">
+
+    
+    <video autoplay muted loop playsinline preload="auto"
+           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.2;z-index:0;pointer-events:none;">
+        <source src="<?php echo e(asset('images/hero/video.mp4')); ?>" type="video/mp4">
+    </video>
 
     
     <div class="hero-scene" aria-hidden="true">
@@ -29,16 +35,16 @@
     </div>
 
     
-    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,31,69,.55) 0%,rgba(26,58,110,.4) 50%,rgba(15,42,92,.55) 100%);z-index:1;pointer-events:none;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,31,69,.55) 0%,rgba(26,58,110,.4) 50%,rgba(15,42,92,.55) 100%);z-index:2;pointer-events:none;"></div>
 
     
-    <div style="position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(232,160,32,.15) 0%,transparent 70%);pointer-events:none;z-index:1;"></div>
-    <div style="position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(41,82,163,.3) 0%,transparent 70%);pointer-events:none;z-index:1;"></div>
+    <div style="position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(232,160,32,.15) 0%,transparent 70%);pointer-events:none;z-index:2;"></div>
+    <div style="position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(41,82,163,.3) 0%,transparent 70%);pointer-events:none;z-index:2;"></div>
 
     
-    <div style="position:absolute;left:0;right:0;bottom:0;height:200px;background:linear-gradient(to bottom, rgba(15,42,92,0) 0%, rgba(15,42,92,.55) 55%, #ffffff 100%);z-index:2;pointer-events:none;"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:200px;background:linear-gradient(to bottom, rgba(15,42,92,0) 0%, rgba(15,42,92,.55) 55%, #ffffff 100%);z-index:3;pointer-events:none;"></div>
 
-    <div style="position:relative;z-index:3;max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:100px 0;">
+    <div style="position:relative;z-index:4;max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:100px 0;">
         <div>
             <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(232,160,32,.15);border:1px solid rgba(232,160,32,.3);color:#f0b84a;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px;">
                 Holding Company Universitas Airlangga
@@ -87,7 +93,7 @@
 
 <?php $__env->startPush('head'); ?>
 <style>
-    .hero-scene { position:absolute; inset:0; z-index:0; overflow:hidden; }
+    .hero-scene { position:absolute; inset:0; z-index:1; overflow:hidden; }
 
     /* Drifting clouds — swap cloud.png for your own art anytime, sizing/animation stays */
     .hero-cloud { position:absolute; width:700px; height:auto; object-fit:contain; }

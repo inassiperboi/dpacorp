@@ -7,10 +7,11 @@
         <li>Produk & Layanan</li>
     </ol>
 </div>
-<section style="background:linear-gradient(135deg,#0d1f45,#1a3a6e);padding:70px 5%;text-align:center;">
-    <h1 style="font-family:'Poppins',sans-serif;font-size:42px;font-weight:800;color:#fff;margin-bottom:14px;">Produk & Layanan</h1>
-    <p style="font-size:16px;color:rgba(255,255,255,.75);max-width:540px;margin:0 auto;line-height:1.7;">Berbagai produk dan layanan unggulan yang dikelola DPA Corp dan anak perusahaannya.</p>
-</section>
+@include('public.partials.hero-video', [
+    'label' => 'Mengenal DPA Corp',
+    'title' => 'Produk & Layanan',
+    'description' => 'PT Dharma Putra Airlangga adalah holding company yang lahir dari rahim Universitas Airlangga, dibangun untuk menjadi jembatan antara akademisi dan dunia bisnis.',
+])
 <section style="padding:80px 5%;">
     <div style="max-width:1100px;margin:0 auto;">
         @if($products->isEmpty())

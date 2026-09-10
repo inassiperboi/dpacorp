@@ -3,84 +3,37 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ManagementMember;
+use App\Models\ManagementStructure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ManagementController extends Controller
 {
-    public function index()
+    public function edit()
     {
-        $members = ManagementMember::orderBy('urutan')->get();
-        return view('admin.management.index', compact('members'));
+        $structure = ManagementStructure::getInstance();
+        return view('admin.management.edit', compact('structure'));
     }
 
-    public function create()
-    {
-        return view('admin.management.create');
-    }
-
-    public function store(Request $request)
+    public function update(Request $request)
     {
         $request->validate([
-            'nama'    => 'required|string|max:255',
-            'jabatan' => 'required|string|max:255',
-            'foto'    => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:4096',
         ]);
 
-        $data = $request->except(['_token', 'foto']);
-        $data['is_active'] = $request->boolean('is_active');
-        if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('management', 'public');
+        $structure = ManagementStructure::getInstance();
+
+        if ($request->hasFile('image')) {
+            if ($structure->image) {
+                Storage::disk('public')->delete($structure->image);
+            }
+            $structure->image = $request->file('image')->store('management', 'public');
         }
 
-        ManagementMember::create($data);
+        $structure->image_alt = $request->image_alt;
+        $structure->save();
 
-        return redirect()->route('admin.management.index')
-            ->with('success', 'Anggota manajemen berhasil ditambahkan.');
-    }
-
-    public function edit(ManagementMember $management)
-    {
-        $member = $management;
-        return view('admin.management.edit', compact('member'));
-    }
-
-    public function update(Request $request, ManagementMember $management)
-    {
-        $request->validate([
-            'nama'    => 'required|string|max:255',
-            'jabatan' => 'required|string|max:255',
-            'foto'    => 'nullable|image|max:2048',
-        ]);
-
-        $data = $request->except(['_token', '_method', 'foto']);
-        $data['is_active'] = $request->boolean('is_active');
-        if ($request->hasFile('foto')) {
-            if ($management->foto) Storage::disk('public')->delete($management->foto);
-            $data['foto'] = $request->file('foto')->store('management', 'public');
-        }
-
-        $management->update($data);
-
-        return redirect()->route('admin.management.index')
-            ->with('success', 'Anggota manajemen berhasil diperbarui.');
-    }
-
-    public function destroy(ManagementMember $management)
-    {
-        if ($management->foto) Storage::disk('public')->delete($management->foto);
-        $management->delete();
-
-        return redirect()->route('admin.management.index')
-            ->with('success', 'Anggota manajemen berhasil dihapus.');
-    }
-
-    public function updateOrder(Request $request)
-    {
-        foreach ($request->order as $item) {
-            ManagementMember::where('id', $item['id'])->update(['urutan' => $item['order']]);
-        }
-        return response()->json(['status' => 'ok']);
+        return redirect()->route('admin.management.edit')
+            ->with('success', 'Gambar struktur manajemen berhasil diperbarui.');
     }
 }

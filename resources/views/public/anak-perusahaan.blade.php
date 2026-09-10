@@ -13,13 +13,11 @@
 </div>
 
 {{-- Header --}}
-<section style="background:linear-gradient(135deg,#0d1f45,#1a3a6e);padding:70px 5%;text-align:center;">
-    <div class="section-label" style="color:#f0b84a;">Grup Bisnis DPA Corp</div>
-    <h1 style="font-family:'Poppins',sans-serif;font-size:42px;font-weight:800;color:#fff;margin-bottom:14px;">Anak Perusahaan</h1>
-    <p style="font-size:16px;color:rgba(255,255,255,.75);max-width:600px;margin:0 auto;line-height:1.7;">
-        Setiap anak perusahaan beroperasi secara mandiri dengan website dan tim tersendiri, di bawah payung holding DPA Corp.
-    </p>
-</section>
+@include('public.partials.hero-video', [
+    'label' => 'Grup Bisnis DPA Corp',
+    'title' => 'Anak Perusahaan',
+    'description' => 'Setiap anak perusahaan beroperasi secara mandiri dengan website dan tim tersendiri, di bawah payung holding DPA Corp.',
+])
 
 {{-- Grid --}}
 <section style="padding:80px 5%;">

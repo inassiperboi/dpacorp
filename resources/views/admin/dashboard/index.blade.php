@@ -93,8 +93,7 @@
         <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
             <a href="{{ route('admin.subsidiaries.create') }}" class="btn btn-primary" style="justify-content:center;">+ Anak Perusahaan</a>
             <a href="{{ route('admin.products.create') }}" class="btn btn-primary" style="justify-content:center;">+ Produk</a>
-            <a href="{{ route('admin.management.create') }}" class="btn btn-secondary" style="justify-content:center;">+ Anggota</a>
-            <a href="{{ route('admin.about.history') }}" class="btn btn-secondary" style="justify-content:center;">Edit Sejarah</a>
+            <a href="{{ route('admin.management.edit') }}" class="btn btn-secondary" style="justify-content:center;">Struktur Manajemen</a>            <a href="{{ route('admin.about.history') }}" class="btn btn-secondary" style="justify-content:center;">Edit Sejarah</a>
             <a href="{{ route('admin.about.vision-mission') }}" class="btn btn-secondary" style="justify-content:center;">Visi & Misi</a>
             <a href="{{ route('admin.company-profile.edit') }}" class="btn btn-accent" style="justify-content:center;">Profil Perusahaan</a>
         </div>

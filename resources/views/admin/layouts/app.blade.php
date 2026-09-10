@@ -890,7 +890,7 @@
         </a>
 
 
-        <a href="{{ route('admin.management.index') }}"
+        <a href="{{ route('admin.management.edit') }}"
            class="nav-item {{ request()->routeIs('admin.management*') ? 'active' : '' }}">
 
             <svg fill="none"

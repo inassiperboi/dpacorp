@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyProfile;
 use App\Models\ContactMessage;
-use App\Models\ManagementMember;
+use App\Models\ManagementStructure;
 use App\Models\ProductService;
 use App\Models\Subsidiary;
 use App\Models\User;
@@ -19,7 +19,7 @@ class DashboardController extends Controller
             'total_pesan'         => ContactMessage::count(),
             'produk_aktif'        => ProductService::where('is_active', true)->count(),
             'anak_perusahaan'     => Subsidiary::where('is_active', true)->count(),
-            'manajemen'           => ManagementMember::where('is_active', true)->count(),
+            'manajemen'           => ManagementStructure::getInstance()->image ? 1 : 0,
             'total_user'          => User::count(),
         ];
 

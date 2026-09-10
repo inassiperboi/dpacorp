@@ -49,9 +49,9 @@ Route::get('/visi-misi', function () {
 
 Route::get('/struktur-manajemen', function () {
     $company = \App\Models\CompanyProfile::getInstance();
-    $members = \App\Models\ManagementMember::where('is_active', true)->orderBy('urutan')->get();
+    $structure = \App\Models\ManagementStructure::getInstance();
     $seo     = \App\Models\SeoSetting::getInstance();
-    return view('public.struktur-manajemen', compact('company', 'members', 'seo'));
+    return view('public.struktur-manajemen', compact('company', 'structure', 'seo'));
 })->name('public.management');
 
 Route::get('/produk-layanan', function () {
@@ -137,12 +137,13 @@ Route::prefix('panel')->name('admin.')->middleware(['web', 'admin.auth'])->group
     Route::delete('/produk-layanan/image/{image}', [ProductServiceController::class, 'destroyImage'])->name('products.image.destroy');
 
     // ── Struktur Manajemen ────────────────────────────────────────────────────
-    Route::resource('/manajemen', ManagementController::class)
-        ->except(['show'])
-        ->names('management')
-        ->parameters(['manajemen' => 'management']);
-    Route::post('/manajemen/order', [ManagementController::class, 'updateOrder'])->name('management.order');
-
+    // Route::resource('/manajemen', ManagementController::class)
+    //     ->except(['show'])
+    //     ->names('management')
+    //     ->parameters(['manajemen' => 'management']);
+    // Route::post('/manajemen/order', [ManagementController::class, 'updateOrder'])->name('management.order');
+    Route::get('/manajemen', [ManagementController::class, 'edit'])->name('management.edit');
+    Route::put('/manajemen', [ManagementController::class, 'update'])->name('management.update');
     // ── Konten Tentang Kami ───────────────────────────────────────────────────
     Route::get('/tentang/sejarah', [AboutContentController::class, 'historyIndex'])->name('about.history');
     Route::post('/tentang/sejarah', [AboutContentController::class, 'historyStore'])->name('about.history.store');
