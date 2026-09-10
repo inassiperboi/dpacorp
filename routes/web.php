@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 // ─── Public Controllers ───────────────────────────────────────────────────────
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NewsPublicController;
+use App\Http\Controllers\BeritaPublicController;
+use App\Http\Controllers\InformasiPublicController;
 
 // ─── Admin Controllers ────────────────────────────────────────────────────────
 use App\Http\Controllers\Admin\AuthController;
@@ -16,6 +19,9 @@ use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\AboutContentController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\NewsInformationController;
+use App\Http\Controllers\Admin\BeritaController;
+use App\Http\Controllers\Admin\InformasiController;
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // PUBLIC ROUTES — Halaman utama website DPA Corp
@@ -85,6 +91,13 @@ Route::get('/client', function () {
 Route::get('/kontak', [ContactController::class, 'index'])->name('public.kontak');
 Route::post('/kontak', [ContactController::class, 'store'])->name('public.kontak.store');
 
+Route::get('/berita-informasi', [NewsPublicController::class, 'index'])->name('public.news.index');
+Route::redirect('/berita', '/berita-informasi#berita');
+Route::get('/berita/{slug}', [BeritaPublicController::class, 'show'])->name('public.berita.show');
+
+Route::redirect('/informasi', '/berita-informasi#informasi');
+Route::get('/informasi/{slug}', [InformasiPublicController::class, 'show'])->name('public.informasi.show');
+
 // ═══════════════════════════════════════════════════════════════════════════════
 // ADMIN AUTH — Route tersembunyi (bukan /admin/login)
 // URL: /cp-dpa/masuk dan /cp-dpa/keluar
@@ -135,6 +148,19 @@ Route::prefix('panel')->name('admin.')->middleware(['web', 'admin.auth'])->group
         ->names('products')
         ->parameters(['produk-layanan' => 'product']);
     Route::delete('/produk-layanan/image/{image}', [ProductServiceController::class, 'destroyImage'])->name('products.image.destroy');
+
+    // ── Berita & Informasi ──────────────────────────────────────────────────
+    Route::get('/berita-informasi', [NewsInformationController::class, 'index'])->name('news-information.index');
+
+    Route::resource('/berita', BeritaController::class)
+        ->except(['show'])
+        ->names('berita')
+        ->parameters(['berita' => 'berita']);
+
+    Route::resource('/informasi', InformasiController::class)
+        ->except(['show'])
+        ->names('informasi')
+        ->parameters(['informasi' => 'informasi']);
 
     // ── Struktur Manajemen ────────────────────────────────────────────────────
     // Route::resource('/manajemen', ManagementController::class)

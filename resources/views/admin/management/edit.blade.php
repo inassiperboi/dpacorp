@@ -38,7 +38,7 @@
         </div>
 
         <div style="display:flex;gap:10px;margin-top:20px;">
-            <button type="submit" class="btn btn-primary">💾 Simpan</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
     </form>
 </div>

@@ -924,6 +924,40 @@
         </a>
 
 
+          <a href="{{ route('admin.berita.index') }}"
+              class="nav-item {{ request()->routeIs('admin.berita*') ? 'active' : '' }}">
+
+            <svg fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor">
+
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 11H5m14-4H5m14 8H5m14 4H5M7 5h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2z"/>
+            </svg>
+
+            Berita
+        </a>
+
+
+        <a href="{{ route('admin.informasi.index') }}"
+           class="nav-item {{ request()->routeIs('admin.informasi*') ? 'active' : '' }}">
+
+            <svg fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor">
+
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 11H5m14-4H5m14 8H5m14 4H5M7 5h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2z"/>
+            </svg>
+
+            Informasi
+        </a>
+
+
         <a href="{{ route('admin.subsidiaries.index') }}"
            class="nav-item {{ request()->routeIs('admin.subsidiaries*') ? 'active' : '' }}">
 

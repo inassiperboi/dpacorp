@@ -261,6 +261,14 @@
 
 
             <a
+                href="{{ route('public.news.index') }}"
+                class="nav-link {{ request()->is('berita-informasi*') || request()->is('berita*') || request()->is('informasi*') ? 'active' : '' }}"
+            >
+                Berita &amp; Informasi
+            </a>
+
+
+            <a
                 href="{{ url('/anak-perusahaan') }}"
                 class="nav-link {{ request()->is('anak-perusahaan') ? 'active' : '' }}"
             >
@@ -316,7 +324,7 @@
                  FOOTER BRAND
             ================================================== --}}
 
-            <div>
+            <div id="footer-contact">
 
                 <div class="footer-brand">
                     DPA <span>Corp</span>
@@ -448,6 +456,14 @@
                     class="footer-link"
                 >
                     Struktur Manajemen
+                </a>
+
+
+                <a
+                    href="{{ route('public.news.index') }}"
+                    class="footer-link"
+                >
+                    Berita &amp; Informasi
                 </a>
 
             </div>

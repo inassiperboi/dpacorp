@@ -239,6 +239,14 @@
 
 
             <a
+                href="<?php echo e(route('public.news.index')); ?>"
+                class="nav-link <?php echo e(request()->is('berita-informasi*') || request()->is('berita*') || request()->is('informasi*') ? 'active' : ''); ?>"
+            >
+                Berita &amp; Informasi
+            </a>
+
+
+            <a
                 href="<?php echo e(url('/anak-perusahaan')); ?>"
                 class="nav-link <?php echo e(request()->is('anak-perusahaan') ? 'active' : ''); ?>"
             >
@@ -288,7 +296,7 @@
 
             
 
-            <div>
+            <div id="footer-contact">
 
                 <div class="footer-brand">
                     DPA <span>Corp</span>
@@ -417,6 +425,14 @@
                     class="footer-link"
                 >
                     Struktur Manajemen
+                </a>
+
+
+                <a
+                    href="<?php echo e(route('public.news.index')); ?>"
+                    class="footer-link"
+                >
+                    Berita &amp; Informasi
                 </a>
 
             </div>
