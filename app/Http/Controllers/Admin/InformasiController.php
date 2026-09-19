@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InformasiRequest;
 use App\Models\Informasi;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -32,7 +33,7 @@ class InformasiController extends Controller
             $data['image'] = $request->file('image')->store('informasi', 'public');
         }
 
-        $data['image_2'] = $this->storeExtraImages($request->file('image_2'), 'informasi');
+        $data['image_2'] = json_encode($this->storeExtraImages($request->file('image_2'), 'informasi'));
 
         Informasi::create($data);
 
@@ -97,7 +98,7 @@ class InformasiController extends Controller
     }
 
     /**
-     * @param  array<int, \Illuminate\Http\UploadedFile>|null  $files
+     * @param  array<int, UploadedFile>|null  $files
      */
     private function storeExtraImages(?array $files, string $directory): array
     {

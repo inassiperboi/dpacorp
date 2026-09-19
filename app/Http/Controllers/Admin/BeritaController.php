@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BeritaRequest;
 use App\Models\Berita;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -29,7 +30,7 @@ class BeritaController extends Controller
         $data['tags'] = $this->normalizeTags($data['tags']);
         $data['image'] = $request->file('image')->store('berita', 'public');
 
-        $data['image_2'] = $this->storeExtraImages($request->file('image_2'), 'berita');
+        $data['image_2'] = json_encode($this->storeExtraImages($request->file('image_2'), 'berita'));
 
         Berita::create($data);
 
@@ -94,7 +95,7 @@ class BeritaController extends Controller
     }
 
     /**
-     * @param  array<int, \Illuminate\Http\UploadedFile>|null  $files
+     * @param  array<int, UploadedFile>|null  $files
      */
     private function storeExtraImages(?array $files, string $directory): array
     {
