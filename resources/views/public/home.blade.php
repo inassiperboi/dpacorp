@@ -164,44 +164,13 @@
             <h2 class="section-title" style="margin:0 auto 14px;">Anak Perusahaan</h2>
             <p class="section-subtitle" style="margin:0 auto;">Empat entitas bisnis yang bersama-sama membangun ekosistem layanan terpadu berbasis universitas.</p>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px;">
+        <div class="subsidiaries-grid">
             @foreach($subsidiaries as $sub)
-            <div class="card-pub" style="position:relative;">
-                {{-- Cover --}}
-                <div style="height:160px;background:linear-gradient(135deg,#1a3a6e,#2952a3);position:relative;overflow:hidden;">
-                    @if($sub->cover_image)
-                        <img src="{{ asset('storage/'.$sub->cover_image) }}" alt="{{ $sub->cover_alt }}" style="width:100%;height:100%;object-fit:cover;opacity:.7;" loading="lazy">
-                    @endif
-                    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,58,110,.8),transparent);"></div>
-                    @if($sub->logo)
-                        <img src="{{ asset('storage/'.$sub->logo) }}" alt="{{ $sub->logo_alt }}" style="position:absolute;bottom:14px;left:16px;height:36px;width:auto;object-fit:contain;filter:brightness(0) invert(1);" loading="lazy">
-                    @endif
-                </div>
-                <div style="padding:20px;">
-                    <div style="font-weight:700;font-size:15px;margin-bottom:8px;color:var(--primary);">{{ $sub->nama }}</div>
-                    <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:14px;">{{ Str::limit($sub->deskripsi_singkat, 90) }}</p>
-                    <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px;">
-                        @foreach($sub->services->take(4) as $svc)
-                            <span style="background:#e0f2fe;color:#0369a1;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;">{{ $svc->nama_layanan }}</span>
-                        @endforeach
-                    </div>
-                    @if($sub->website_url)
-                        <a href="{{ $sub->website_url }}" target="_blank" rel="noopener noreferrer"
-                           class="btn-pub btn-pub-primary" style="width:100%;justify-content:center;font-size:13px;padding:10px 16px;">
-                            Kunjungi Website ↗
-                        </a>
-                    @else
-                        <button onclick="showSubsidiaryModal('{{ addslashes($sub->nama) }}','{{ addslashes($sub->deskripsi_singkat) }}')"
-                                class="btn-pub btn-pub-outline" style="width:100%;justify-content:center;font-size:13px;padding:10px 16px;">
-                            Info Lebih Lanjut
-                        </button>
-                    @endif
-                </div>
-            </div>
+                @include('public.partials.subsidiary-card', ['sub' => $sub])
             @endforeach
         </div>
-        <div style="text-align:center;margin-top:36px;">
-            <a href="{{ url('/anak-perusahaan') }}" class="btn-pub btn-pub-primary">Lihat Semua Anak Perusahaan →</a>
+        <div style="text-align:center;margin-top:44px;">
+            <a href="{{ url('/anak-perusahaan') }}" class="btn-pub btn-pub-primary" style="padding:12px 28px;font-size:14px;border-radius:12px;">Lihat Semua Anak Perusahaan →</a>
         </div>
     </div>
 </section>

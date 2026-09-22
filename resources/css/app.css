@@ -1069,3 +1069,278 @@ h2.section-title {
         width: 100%;
     }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   SUBSIDIARY CARDS (ANAK PERUSAHAAN) REDESIGN
+   ═══════════════════════════════════════════════════════════════════ */
+
+.subsidiaries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 28px;
+    align-items: stretch;
+}
+
+.subsidiary-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.subsidiary-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(41, 82, 163, 0.35);
+    box-shadow: 0 20px 35px -8px rgba(26, 58, 110, 0.14), 0 10px 15px -5px rgba(26, 58, 110, 0.06);
+}
+
+.subsidiary-card-banner {
+    position: relative;
+    height: 115px;
+    width: 100%;
+    background: linear-gradient(135deg, #0d1f45 0%, #1a3a6e 50%, #2952a3 100%);
+    overflow: hidden;
+}
+
+.subsidiary-card-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.65;
+    transition: transform 0.5s ease;
+}
+
+.subsidiary-card:hover .subsidiary-card-cover {
+    transform: scale(1.08);
+}
+
+.subsidiary-card-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+    background-size: 16px 16px;
+    opacity: 0.7;
+}
+
+.subsidiary-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 20%, rgba(13, 31, 69, 0.45) 100%);
+}
+
+.subsidiary-logo-avatar {
+    position: absolute;
+    top: 75px;
+    left: 24px;
+    width: 62px;
+    height: 62px;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    padding: 8px;
+    transition: transform 0.3s ease;
+}
+
+.subsidiary-card:hover .subsidiary-logo-avatar {
+    transform: scale(1.05);
+}
+
+.subsidiary-logo-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.subsidiary-logo-fallback {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #1a3a6e, #2952a3);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.subsidiary-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 38px 24px 22px 24px;
+}
+
+.subsidiary-card-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.35;
+    margin-bottom: 6px;
+}
+
+.subsidiary-card-location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.subsidiary-card-location svg {
+    color: #e8a020;
+    flex-shrink: 0;
+}
+
+.subsidiary-card-desc {
+    font-size: 13.5px;
+    color: #475569;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 64px;
+}
+
+.subsidiary-card-services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+    min-height: 32px;
+    align-content: flex-start;
+}
+
+.subsidiary-service-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #f0f9ff;
+    color: #0369a1;
+    border: 1px solid #e0f2fe;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.subsidiary-service-chip-more {
+    background: #f1f5f9;
+    color: #475569;
+    border-color: #e2e8f0;
+}
+
+.subsidiary-service-chip-default {
+    background: #f8fafc;
+    color: #64748b;
+    border-color: #f1f5f9;
+}
+
+.subsidiary-meta-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-bottom: 18px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.subsidiary-meta-info strong {
+    color: #334155;
+}
+
+.subsidiary-contacts {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.subsidiary-contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.subsidiary-contact-ig { background: #f0f4ff; color: #1a3a6e; }
+.subsidiary-contact-wa { background: #f0fdf4; color: #166534; }
+.subsidiary-contact-mail { background: #faf5ff; color: #6b21a8; }
+
+.subsidiary-card-footer {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.subsidiary-btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 12px;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.subsidiary-btn-primary {
+    background: linear-gradient(135deg, #1a3a6e 0%, #2952a3 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(26, 58, 110, 0.18);
+}
+
+.subsidiary-btn-primary:hover {
+    background: linear-gradient(135deg, #15305b 0%, #20438a 100%);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(26, 58, 110, 0.28);
+}
+
+.subsidiary-btn-outline {
+    background: #ffffff;
+    color: #1a3a6e;
+    border-color: #cbd5e1;
+}
+
+.subsidiary-btn-outline:hover {
+    background: #1a3a6e;
+    color: #ffffff;
+    border-color: #1a3a6e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(26, 58, 110, 0.18);
+}
+
